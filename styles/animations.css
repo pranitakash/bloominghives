@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════
+   HOVER & MICRO ANIMATIONS
+   GSAP handles all scroll-triggered animations
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Service Card Hover ─── */
+.service-card__visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.4s;
+}
+
+.service-card:hover .service-card__visual::after {
+  background: rgba(0,0,0,0.05);
+}
+
+.service-card__image-placeholder {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover .service-card__image-placeholder {
+  transform: scale(1.03);
+}
+
+/* ─── Project Card Hover ─── */
+.project-card__arrow svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card__arrow svg {
+  transform: translate(2px, -2px);
+}
+
+/* ─── Results Card Hover ─── */
+.results__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  background: linear-gradient(135deg,
+    rgba(167,139,250,0.05),
+    rgba(236,72,153,0.05),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.results__card:hover::before {
+  opacity: 1;
+}
+
+/* ─── Article Card Hover ─── */
+.article-card__image {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.article-card:hover .article-card__image-inner {
+  transform: scale(1.1);
+}
+
+.article-card__image-inner {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── FAQ Icon Rotation ─── */
+.faq__icon {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Smooth Link Underlines ─── */
+.footer__social-link::after,
+.footer__links a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer__social-link:hover::after,
+.footer__links a:hover::after {
+  width: 100%;
+}
+
+/* ─── Menu Overlay Items Stagger ─── */
+.menu-overlay.open .menu-overlay__link {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: menuItemIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.menu-overlay.open li:nth-child(1) .menu-overlay__link { animation-delay: 0.1s; }
+.menu-overlay.open li:nth-child(2) .menu-overlay__link { animation-delay: 0.15s; }
+.menu-overlay.open li:nth-child(3) .menu-overlay__link { animation-delay: 0.2s; }
+.menu-overlay.open li:nth-child(4) .menu-overlay__link { animation-delay: 0.25s; }
+.menu-overlay.open li:nth-child(5) .menu-overlay__link { animation-delay: 0.3s; }
+
+@keyframes menuItemIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Floating CTA Pulse ─── */
+.floating-cta.visible {
+  animation: floatPulse 3s ease-in-out 2s infinite;
+}
+
+@keyframes floatPulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 8px 48px rgba(167,139,250,0.2); }
+}
+
+/* ─── Hero Gradient Animation ─── */
+.hero__gradient-bg {
+  animation: gradientShift 12s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(15deg); }
+}
+
+/* ─── Outline Text Glow ─── */
+.outline-text {
+  transition: -webkit-text-stroke 0.6s;
+}
+
+/* ─── Button Magnetic Hover ─── */
+.btn-pill {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s,
+              border-color 0.3s;
+}
+
+.btn-pill:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── Project Card Lift ─── */
+.project-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* ─── Partner Logo Hover ─── */
+.partner-logo {
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+.partner-logo:hover {
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.9);
+  transform: translateY(-2px);
+}
+
+/* ─── Results Card Hover Scale ─── */
+.results__card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.results__card:hover {
+  transform: translateY(-4px);
+}

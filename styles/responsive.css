@@ -1,0 +1,247 @@
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Tablet (1024px and below) ─── */
+@media (max-width: 1024px) {
+  .services-intro {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .service-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    position: relative;
+    top: auto !important;
+    margin-bottom: 24px;
+  }
+
+  .service-card__visual {
+    height: 300px;
+  }
+
+  .service-card__image-placeholder {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 24px 24px;
+    min-height: 300px;
+  }
+
+  .service-card__img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 24px 24px;
+    min-height: 300px;
+  }
+
+  .work-intro {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partners__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .articles__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__email {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .menu-overlay {
+    width: 100%;
+  }
+}
+
+/* ─── Mobile Large (768px and below) ─── */
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 60px;
+    --container-pad: 20px;
+  }
+
+  /* Header */
+  .btn-pill--header {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 40px;
+    min-height: 85vh;
+  }
+
+  .hero__sub {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    max-width: 100%;
+    margin-top: 32px;
+  }
+
+  .hero__badges {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 32px;
+  }
+
+  /* Services */
+  .service-card__content {
+    padding: 32px 24px;
+  }
+
+  .service-card__visual {
+    height: 220px;
+  }
+
+  /* Approach */
+  .approach__block--right {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  /* Work intro */
+  .outline-text {
+    font-size: clamp(3rem, 15vw, 6rem);
+  }
+
+  .outline-text--indent {
+    padding-left: 10%;
+  }
+
+  /* Results */
+  .results__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .results__card {
+    padding: 32px 20px;
+  }
+
+  /* Partners */
+  .partners__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Articles */
+  .articles__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .articles__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Footer */
+  .footer__main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer__socials {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer__links {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer__sectors {
+    flex-wrap: wrap;
+  }
+
+  /* Floating CTA */
+  .floating-cta {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ─── Mobile Small (480px and below) ─── */
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: clamp(3.2rem, 16vw, 5rem);
+  }
+
+  .hero__line--indent {
+    padding-left: 8%;
+  }
+
+  .service-card__title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .approach__title {
+    font-size: 1.3rem;
+  }
+
+  .results__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .partners__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partner-logo {
+    padding: 24px 12px;
+    font-size: 0.9rem;
+  }
+
+  .testimonial__quote {
+    font-size: 1rem;
+  }
+
+  .footer__email {
+    font-size: 1.4rem;
+    word-break: break-all;
+  }
+}
+
+/* ─── Large screens (1440px+) ─── */
+@media (min-width: 1440px) {
+  .hero__title {
+    font-size: 13rem;
+  }
+
+  .service-card {
+    min-height: 560px;
+  }
+}
