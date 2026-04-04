@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Blooming Hives | Digital Marketing Insights & Trends</title>
+  <meta name="description" content="News, insights, and marketing culture from Blooming Hives. Read our latest articles on performance marketing, SEO, social media, and brand strategy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/blog.css" />
+</head>
+<body class="blog-page">
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" id="logo" aria-label="Blooming Hives Home">
+        <svg viewBox="0 0 60 60" class="logo-svg">
+          <rect x="2" y="2" width="56" height="56" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+          <text x="50%" y="38%" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="800" fill="currentColor" font-family="Inter, sans-serif">BH</text>
+        </svg>
+      </a>
+      <div class="header-actions">
+        <a href="/contact.html" class="btn-pill btn-pill--header" id="header-cta">
+          <span>Get Started</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="menu-toggle__line"></span>
+          <span class="menu-toggle__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ MENU OVERLAY ═══════════════════ -->
+  <nav class="menu-overlay" id="menu-overlay" aria-hidden="true">
+    <div class="menu-overlay__inner">
+      <ul class="menu-overlay__list">
+        <li><a href="/#work" class="menu-overlay__link" data-menu-link>Work</a></li>
+        <li><a href="/about.html" class="menu-overlay__link" data-menu-link>About</a></li>
+        <li>
+          <a href="/#services" class="menu-overlay__link" data-menu-link>Services <span class="menu-plus">+</span></a>
+          <ul class="menu-overlay__sublist">
+            <li><a href="#" data-menu-link>Performance Marketing</a></li>
+            <li><a href="#" data-menu-link>Social Media Management</a></li>
+            <li><a href="#" data-menu-link>SEO Optimization</a></li>
+            <li><a href="#" data-menu-link>Website Development</a></li>
+          </ul>
+        </li>
+        <li><a href="/blog.html" class="menu-overlay__link active" data-menu-link>Blog</a></li>
+        <li><a href="/contact.html" class="menu-overlay__link" data-menu-link>Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ BLOG HERO ═══════════════════ -->
+  <section class="blog-hero">
+    <div class="blog-hero__bg">
+      <canvas id="blog-bg-canvas"></canvas>
+    </div>
+    <div class="blog-hero__content">
+      <h1 class="blog-hero__title">
+        <div class="title-line"><span>News, insights,</span></div>
+        <div class="title-line"><span>& marketing culture</span></div>
+        <div class="title-line"><span>from Blooming Hives.</span></div>
+      </h1>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FEATURED POST ═══════════════════ -->
+  <section class="blog-featured">
+    <a href="#" class="blog-featured__card" id="featured-post">
+      <div class="blog-featured__image">
+        <img src="/assets/images/article-meta-ads.png" alt="5 Meta Ads Strategies That Actually Work in 2025" loading="eager" />
+        <div class="blog-featured__categories">
+          <span class="blog-tag">Featured</span>
+          <span class="blog-tag">Performance Marketing</span>
+        </div>
+      </div>
+      <h2 class="blog-featured__title">5 Meta Ads Strategies That Actually Work in 2025</h2>
+    </a>
+  </section>
+
+  <!-- ═══════════════════ DIVIDER ═══════════════════ -->
+  <div class="blog-divider"><hr /></div>
+
+  <!-- ═══════════════════ FILTER BAR ═══════════════════ -->
+  <section class="blog-filters">
+    <div class="blog-filters__inner">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="performance-marketing">Performance Marketing</button>
+      <button class="filter-chip" data-filter="social-media">Social Media</button>
+      <button class="filter-chip" data-filter="seo">SEO & Content</button>
+      <button class="filter-chip" data-filter="branding">Branding</button>
+      <button class="filter-chip" data-filter="web-development">Web Development</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ BLOG GRID ═══════════════════ -->
+  <section class="blog-grid">
+    <div class="blog-grid__inner">
+
+      <a href="#" class="blog-card" data-category="social-media" id="post-1">
+        <div class="blog-card__image">
+          <img src="/assets/images/article-social-media.png" alt="Why Your Brand Needs a Social Media Strategy" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Social Media</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">Why Your Brand Needs a Social Media Strategy, Not Just Posts</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="seo" id="post-2">
+        <div class="blog-card__image">
+          <img src="/assets/images/article-seo.png" alt="SEO in 2025: What's Changed" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">SEO & Content</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">SEO in 2025: What's Changed and What Still Matters</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="branding" id="post-3">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-brand-identity.png" alt="Building a Brand Identity That Lasts" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Branding</span>
+            <span class="blog-tag">Strategy</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">Building a Brand Identity That Lasts — Beyond Logos and Colors</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="performance-marketing" id="post-4">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-google-ads.png" alt="Google Ads Quality Score Guide" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Performance Marketing</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">The Complete Guide to Google Ads Quality Score in 2025</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="social-media" id="post-5">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-social-trends.png" alt="Social Media Trends to Watch" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Social Media</span>
+            <span class="blog-tag">Trends</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">7 Social Media Trends That Will Define 2025</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="seo" id="post-6">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-content-strategy.png" alt="Content Strategy Framework" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">SEO & Content</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">How to Build a Content Strategy That Drives Organic Traffic</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="web-development" id="post-7">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-web-design.png" alt="Web Design Principles" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Web Development</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">10 Web Design Principles Every Business Website Needs</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="performance-marketing" id="post-8">
+        <div class="blog-card__image">
+          <img src="/assets/images/blog-ecommerce.png" alt="E-commerce Growth" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Performance Marketing</span>
+            <span class="blog-tag">E-commerce</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">E-commerce Growth: From First Sale to Scaling Revenue</h3>
+      </a>
+
+      <a href="#" class="blog-card" data-category="branding" id="post-9">
+        <div class="blog-card__image">
+          <img src="/assets/images/service-social.png" alt="Small Business Marketing" loading="lazy" />
+          <div class="blog-card__tags">
+            <span class="blog-tag">Branding</span>
+          </div>
+        </div>
+        <h3 class="blog-card__title">Marketing on a Budget: Smart Strategies for Small Businesses</h3>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ NEWSLETTER CTA ═══════════════════ -->
+  <section class="blog-newsletter">
+    <div class="blog-newsletter__inner">
+      <h2 class="blog-newsletter__title">Stay in the loop.</h2>
+      <p class="blog-newsletter__desc">Get the latest marketing insights, trends, and tips delivered straight to your inbox.</p>
+      <form class="blog-newsletter__form" id="newsletter-form">
+        <input type="email" placeholder="Enter your email" required class="blog-newsletter__input" />
+        <button type="submit" class="blog-newsletter__btn">
+          <span>Subscribe</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <div class="footer-dark-wrapper">
+    <footer class="site-footer" id="footer">
+      <div class="footer__blob">
+        <div class="footer__blob-visual"></div>
+      </div>
+
+      <div class="footer__main">
+        <div class="footer__logo">
+          <svg viewBox="0 0 60 60" class="logo-svg logo-svg--footer">
+            <rect x="2" y="2" width="56" height="56" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+            <text x="50%" y="38%" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="800" fill="currentColor" font-family="Inter, sans-serif">BH</text>
+          </svg>
+        </div>
+        <a href="mailto:hello@bloominghives.in" class="footer__email">hello@bloominghives.in</a>
+      </div>
+
+      <div class="footer__row">
+        <div class="footer__socials">
+          <a href="https://www.facebook.com/profile.php?id=61586175253187" class="footer__social-link" target="_blank" rel="noopener">Facebook <span class="arrow-up-right">↗</span></a>
+          <a href="https://www.instagram.com/bloominghives.in" class="footer__social-link" target="_blank" rel="noopener">Instagram <span class="arrow-up-right">↗</span></a>
+          <a href="https://www.linkedin.com/company/bloominghives/" class="footer__social-link" target="_blank" rel="noopener">LinkedIn <span class="arrow-up-right">↗</span></a>
+          <a href="https://wa.me/919217542713" class="footer__social-link" target="_blank" rel="noopener">WhatsApp <span class="arrow-up-right">↗</span></a>
+        </div>
+        <div class="footer__badges-row">
+          <span class="footer__badge-item">★ 5-Star Rated</span>
+          <span class="footer__badge-item">◆ Google Partner</span>
+        </div>
+      </div>
+
+      <div class="footer__row">
+        <div class="footer__links">
+          <a href="/contact.html">Contact</a>
+          <a href="/#faq">FAQs</a>
+          <a href="https://bloominghives.in/privacy-policy/">Privacy Policy</a>
+          <a href="https://bloominghives.in/terms-conditions/">Terms & Conditions</a>
+        </div>
+        <a href="#" class="btn-pill btn-pill--outline btn-pill--light btn-pill--small footer__newsletter">
+          <span>Sign up to our newsletter</span>
+        </a>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__sectors">
+          <span class="footer__sectors-label">Our sectors :</span>
+          <a href="#" class="pill pill--dark">Real Estate</a>
+          <a href="#" class="pill pill--dark">Food & Restaurants</a>
+          <a href="#" class="pill pill--dark">Fashion & Lifestyle</a>
+          <a href="#" class="pill pill--dark">Education</a>
+          <a href="#" class="pill pill--dark">Healthcare</a>
+          <a href="#" class="pill pill--dark">E-Commerce</a>
+        </div>
+        <span class="footer__copyright">© 2026 Blooming Hives. All Rights Reserved.</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ═══════════════════ FLOATING CTA ═══════════════════ -->
+  <a href="/contact.html" class="floating-cta" id="floating-cta" aria-label="Start your project">
+    <span>Start Your Project</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <script type="module" src="/scripts/blog.js"></script>
+</body>
+</html>
