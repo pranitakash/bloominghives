@@ -118,6 +118,7 @@ function closeMenu() {
   menuOverlay.classList.remove('open');
   menuOverlay.setAttribute('aria-hidden', 'true');
   backdrop.classList.remove('visible');
+  document.querySelectorAll('.menu-overlay__list li.expanded').forEach(li => li.classList.remove('expanded'));
   lenis.start();
 }
 
@@ -125,8 +126,22 @@ menuToggle.addEventListener('click', () => {
   menuOverlay.classList.contains('open') ? closeMenu() : openMenu();
 });
 backdrop.addEventListener('click', closeMenu);
+// Services submenu toggle
+document.querySelectorAll('.menu-overlay__link').forEach(link => {
+  if (link.querySelector('.menu-plus')) {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      link.closest('li').classList.toggle('expanded');
+    });
+  }
+});
+
 document.querySelectorAll('[data-menu-link]').forEach(link => {
-  link.addEventListener('click', closeMenu);
+  // Don't close menu when clicking Services (it has its own toggle)
+  if (!link.querySelector('.menu-plus')) {
+    link.addEventListener('click', closeMenu);
+  }
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeMenu();

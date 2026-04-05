@@ -64,7 +64,8 @@
   }
 
   .menu-overlay {
-    width: 100%;
+    width: calc(100vw - 40px);
+    right: 20px;
   }
 }
 
