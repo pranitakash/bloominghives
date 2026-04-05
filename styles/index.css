@@ -30,6 +30,8 @@ html.lenis, html.lenis body {
 .hero__line {
   overflow: hidden;
   display: block;
+  padding-top: 0.05em;
+  padding-bottom: 0.1em;
 }
 
 :root {
@@ -219,13 +221,11 @@ button {
 }
 
 .site-header.scrolled::after {
-  opacity: 1;
+  opacity: 0;
 }
 
 .site-header.scrolled {
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: transparent;
 }
 
 .header-inner {
@@ -294,28 +294,68 @@ button {
   transform: rotate(-45deg) translate(2.5px, -2.5px);
 }
 
+/* ─── Header on Light Background ─── */
+.site-header.header--on-light .btn-pill--header {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-bg);
+}
+.site-header.header--on-light .btn-pill--header:hover {
+  background: transparent;
+  color: var(--color-text-dark);
+  border-color: var(--color-text-dark);
+}
+
+.site-header.header--on-light .menu-toggle {
+  border-color: var(--color-text-dark);
+}
+.site-header.header--on-light .menu-toggle__line {
+  background: var(--color-text-dark);
+}
+.site-header.header--on-light .menu-toggle:hover {
+  background: var(--color-text-dark);
+}
+.site-header.header--on-light .menu-toggle:hover .menu-toggle__line {
+  background: var(--color-text);
+}
+
+.site-header.header--on-light .logo-svg {
+  color: var(--color-text-dark);
+}
+
 /* ═══════════════════════════════════════════════════
-   MENU OVERLAY
+   MENU OVERLAY — Compact Floating Dropdown
    ═══════════════════════════════════════════════════ */
 .menu-overlay {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 420px;
-  height: 100vh;
-  background: var(--color-text);
+  top: 20px;
+  right: var(--container-pad);
+  width: min(380px, calc(100vw - 40px));
+  background: #ffffff;
   z-index: 999;
-  transform: translateX(100%);
-  transition: transform 0.6s var(--ease);
-  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow:
+    0 12px 48px rgba(0,0,0,0.15),
+    0 4px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+  /* Initial state: invisible, scaled down from top-right corner */
+  opacity: 0;
+  transform: scale(0.92);
+  transform-origin: top right;
+  pointer-events: none;
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.35s var(--ease);
 }
 
 .menu-overlay.open {
-  transform: translateX(0);
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .menu-overlay__inner {
-  padding: 120px 48px 48px;
+  padding: 48px 36px 36px;
 }
 
 .menu-overlay__list {
@@ -324,51 +364,69 @@ button {
 
 .menu-overlay__link {
   display: block;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--color-text-dark);
-  padding: 12px 0;
-  transition: opacity 0.3s;
+  padding: 10px 0;
+  transition: opacity 0.3s, transform 0.3s var(--ease);
 }
 
 .menu-overlay__link:hover {
   opacity: 0.5;
+  transform: translateX(4px);
 }
 
 .menu-plus {
   font-size: 0.9rem;
   margin-left: 4px;
   opacity: 0.5;
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+.menu-overlay__list li.expanded .menu-plus {
+  transform: rotate(45deg);
 }
 
 .menu-overlay__sublist {
   list-style: none;
   padding-left: 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease), margin 0.4s var(--ease);
+  margin-bottom: 0;
+}
+
+.menu-overlay__list li.expanded .menu-overlay__sublist {
+  max-height: 400px;
   margin-bottom: 8px;
 }
 
 .menu-overlay__sublist a {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  color: rgba(26,26,26,0.6);
+  color: rgba(26,26,26,0.55);
   display: block;
-  padding: 6px 0;
-  transition: color 0.3s;
+  padding: 5px 0;
+  transition: color 0.3s, transform 0.3s var(--ease);
 }
 
 .menu-overlay__sublist a:hover {
   color: var(--color-text-dark);
+  transform: translateX(4px);
 }
 
 /* Menu backdrop */
 .menu-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.25);
   z-index: 998;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s var(--ease);
+  transition: opacity 0.4s var(--ease);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .menu-backdrop.visible {
@@ -412,7 +470,7 @@ button {
 .hero__title {
   font-size: var(--font-hero);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1.0;
   letter-spacing: -0.03em;
   color: var(--color-text-dark);
   text-transform: lowercase;
@@ -534,7 +592,7 @@ button {
    SERVICES — Sticky Card Stack (Kota Style)
    ═══════════════════════════════════════════════════ */
 .services {
-  padding: 0 clamp(16px, 2vw, 32px);
+  padding: 0 clamp(20px, 3vw, 48px);
   max-width: 1800px;
   margin: 0 auto;
   position: relative;
@@ -546,18 +604,25 @@ button {
   background: var(--color-bg-light);
   border-radius: 28px;
   overflow: hidden;
-  min-height: 88vh;
+  height: calc(100vh - 100px);
+  max-height: 800px;
   position: sticky;
   top: 80px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   box-shadow: 0 -20px 80px rgba(0,0,0,0.3);
   will-change: transform;
   transform-origin: center top;
 }
 
-.service-card:nth-child(1) { top: 60px; z-index: 1; }
-.service-card:nth-child(2) { top: 80px; z-index: 2; }
-.service-card:nth-child(3) { top: 100px; z-index: 3; }
+/* Each card: staggered top offset + z-index for sticky stack */
+.service-card:nth-child(1) { top: 40px; z-index: 1; height: calc(100vh - 80px); }
+.service-card:nth-child(2) { top: 50px; z-index: 2; height: calc(100vh - 90px); }
+.service-card:nth-child(3) { top: 60px; z-index: 3; height: calc(100vh - 100px); }
+.service-card:nth-child(4) { top: 70px; z-index: 4; height: calc(100vh - 110px); }
+.service-card:nth-child(5) { top: 80px; z-index: 5; height: calc(100vh - 120px); }
+.service-card:nth-child(6) { top: 90px; z-index: 6; height: calc(100vh - 130px); }
+.service-card:nth-child(7) { top: 100px; z-index: 7; height: calc(100vh - 140px); }
+.service-card:nth-child(8) { top: 110px; z-index: 8; height: calc(100vh - 150px); }
 
 .service-card__content {
   padding: clamp(40px, 5vw, 72px);
@@ -680,7 +745,7 @@ button {
   font-weight: 900;
   line-height: 0.85;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.12);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.45);
   letter-spacing: -0.03em;
   user-select: none;
 }
@@ -717,13 +782,22 @@ button {
   display: block;
   border-radius: var(--radius-card);
   overflow: hidden;
-  background: var(--color-bg-card);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 4px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
   transition: all 0.5s var(--ease);
 }
 
 .project-card:hover {
-  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.1);
   transform: translateY(-4px);
 }
 
@@ -818,7 +892,7 @@ button {
 }
 
 /* ═══════════════════════════════════════════════════
-   RESULTS
+   RESULTS — Bento Grid with Glass
    ═══════════════════════════════════════════════════ */
 .results {
   padding: var(--section-pad) var(--container-pad);
@@ -833,22 +907,51 @@ button {
 .results__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Bento: first card spans 2 cols, last card spans 2 cols */
+.results__card:nth-child(1) {
+  grid-column: span 2;
+}
+
+.results__card:nth-child(4) {
+  grid-column: span 2;
 }
 
 .results__card {
   position: relative;
-  background: var(--color-bg-card);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius-card);
-  padding: 48px 32px;
+  padding: 48px 36px;
   text-align: center;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: border-color 0.3s;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 4px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: all 0.5s var(--ease);
 }
 
 .results__card:hover {
-  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+
+/* Wide cards get left-aligned text for visual variety */
+.results__card:nth-child(1),
+.results__card:nth-child(4) {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  text-align: left;
 }
 
 .results__stat {
@@ -862,6 +965,13 @@ button {
   background-clip: text;
 }
 
+/* In wide cards, remove bottom margin on stat since they're side-by-side */
+.results__card:nth-child(1) .results__stat,
+.results__card:nth-child(4) .results__stat {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
 .results__label {
   font-size: var(--font-small);
   color: var(--color-text-muted);
@@ -872,15 +982,42 @@ button {
   position: absolute;
   bottom: -40px;
   right: -40px;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: radial-gradient(circle,
-    rgba(167,139,250,0.15),
-    rgba(236,72,153,0.1),
+    rgba(167,139,250,0.12),
+    rgba(236,72,153,0.08),
     transparent
   );
   pointer-events: none;
+}
+
+/* Responsive: stack bento on smaller screens */
+@media (max-width: 900px) {
+  .results__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .results__card:nth-child(1),
+  .results__card:nth-child(4) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .results__cards {
+    grid-template-columns: 1fr;
+  }
+  .results__card:nth-child(1),
+  .results__card:nth-child(4) {
+    grid-column: span 1;
+    flex-direction: column;
+    text-align: center;
+  }
+  .results__card:nth-child(1) .results__stat,
+  .results__card:nth-child(4) .results__stat {
+    margin-bottom: 12px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════

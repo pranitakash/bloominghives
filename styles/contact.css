@@ -50,7 +50,7 @@
   font-family: var(--font-hero);
   font-size: clamp(3.5rem, 10vw, 8.5rem);
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.045em;
   text-transform: capitalize;
 }
@@ -60,6 +60,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.25em;
+  padding-top: 0.05em;
+  padding-bottom: 0.1em;
 }
 
 .title-line span {

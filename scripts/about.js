@@ -5,8 +5,12 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { initHeaderContrast } from './header-contrast.js';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Initialize header contrast detection
+initHeaderContrast();
 
 // ═══════════════════════════════════════════════════
 // LENIS SMOOTH SCROLL
@@ -279,29 +283,54 @@ if (footerBlob) {
 // ═══════════════════════════════════════════════════
 const menuToggle = document.getElementById('menu-toggle');
 const menuOverlay = document.getElementById('menu-overlay');
-let isMenuOpen = false;
+
+const backdrop = document.createElement('div');
+backdrop.classList.add('menu-backdrop');
+document.body.appendChild(backdrop);
+
+function openMenu() {
+  menuToggle.classList.add('active');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  menuOverlay.classList.add('open');
+  menuOverlay.setAttribute('aria-hidden', 'false');
+  backdrop.classList.add('visible');
+  lenis.stop();
+}
+
+function closeMenu() {
+  menuToggle.classList.remove('active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuOverlay.classList.remove('open');
+  menuOverlay.setAttribute('aria-hidden', 'true');
+  backdrop.classList.remove('visible');
+  document.querySelectorAll('.menu-overlay__list li.expanded').forEach(li => li.classList.remove('expanded'));
+  lenis.start();
+}
 
 if (menuToggle && menuOverlay) {
   menuToggle.addEventListener('click', () => {
-    isMenuOpen = !isMenuOpen;
-    menuToggle.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', isMenuOpen);
+    menuOverlay.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  backdrop.addEventListener('click', closeMenu);
 
-    if (isMenuOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
+  // Services submenu toggle
+  document.querySelectorAll('.menu-overlay__link').forEach(link => {
+    if (link.querySelector('.menu-plus')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        link.closest('li').classList.toggle('expanded');
+      });
     }
   });
 
-  document.querySelectorAll('.menu-overlay__link').forEach((link) => {
-    link.addEventListener('click', () => {
-      isMenuOpen = false;
-      menuToggle.classList.remove('active');
-      menuOverlay.classList.remove('active');
-      lenis.start();
-    });
+  document.querySelectorAll('[data-menu-link]').forEach(link => {
+    if (!link.querySelector('.menu-plus')) {
+      link.addEventListener('click', closeMenu);
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
