@@ -219,13 +219,11 @@ button {
 }
 
 .site-header.scrolled::after {
-  opacity: 1;
+  opacity: 0;
 }
 
 .site-header.scrolled {
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: transparent;
 }
 
 .header-inner {
