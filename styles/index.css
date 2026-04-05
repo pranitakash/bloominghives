@@ -717,13 +717,22 @@ button {
   display: block;
   border-radius: var(--radius-card);
   overflow: hidden;
-  background: var(--color-bg-card);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 4px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
   transition: all 0.5s var(--ease);
 }
 
 .project-card:hover {
-  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.1);
   transform: translateY(-4px);
 }
 
@@ -818,7 +827,7 @@ button {
 }
 
 /* ═══════════════════════════════════════════════════
-   RESULTS
+   RESULTS — Bento Grid with Glass
    ═══════════════════════════════════════════════════ */
 .results {
   padding: var(--section-pad) var(--container-pad);
@@ -833,22 +842,51 @@ button {
 .results__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Bento: first card spans 2 cols, last card spans 2 cols */
+.results__card:nth-child(1) {
+  grid-column: span 2;
+}
+
+.results__card:nth-child(4) {
+  grid-column: span 2;
 }
 
 .results__card {
   position: relative;
-  background: var(--color-bg-card);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius-card);
-  padding: 48px 32px;
+  padding: 48px 36px;
   text-align: center;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: border-color 0.3s;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 4px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: all 0.5s var(--ease);
 }
 
 .results__card:hover {
-  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+
+/* Wide cards get left-aligned text for visual variety */
+.results__card:nth-child(1),
+.results__card:nth-child(4) {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  text-align: left;
 }
 
 .results__stat {
@@ -862,6 +900,13 @@ button {
   background-clip: text;
 }
 
+/* In wide cards, remove bottom margin on stat since they're side-by-side */
+.results__card:nth-child(1) .results__stat,
+.results__card:nth-child(4) .results__stat {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
 .results__label {
   font-size: var(--font-small);
   color: var(--color-text-muted);
@@ -872,15 +917,42 @@ button {
   position: absolute;
   bottom: -40px;
   right: -40px;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: radial-gradient(circle,
-    rgba(167,139,250,0.15),
-    rgba(236,72,153,0.1),
+    rgba(167,139,250,0.12),
+    rgba(236,72,153,0.08),
     transparent
   );
   pointer-events: none;
+}
+
+/* Responsive: stack bento on smaller screens */
+@media (max-width: 900px) {
+  .results__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .results__card:nth-child(1),
+  .results__card:nth-child(4) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .results__cards {
+    grid-template-columns: 1fr;
+  }
+  .results__card:nth-child(1),
+  .results__card:nth-child(4) {
+    grid-column: span 1;
+    flex-direction: column;
+    text-align: center;
+  }
+  .results__card:nth-child(1) .results__stat,
+  .results__card:nth-child(4) .results__stat {
+    margin-bottom: 12px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
