@@ -6,8 +6,12 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { initHeaderContrast } from './header-contrast.js';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Initialize header contrast detection
+initHeaderContrast();
 
 // ═══════════════════════════════════════════════════
 // LENIS SMOOTH SCROLL
