@@ -30,6 +30,8 @@ html.lenis, html.lenis body {
 .hero__line {
   overflow: hidden;
   display: block;
+  padding-top: 0.05em;
+  padding-bottom: 0.1em;
 }
 
 :root {
@@ -468,7 +470,7 @@ button {
 .hero__title {
   font-size: var(--font-hero);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1.0;
   letter-spacing: -0.03em;
   color: var(--color-text-dark);
   text-transform: lowercase;
@@ -738,7 +740,7 @@ button {
   font-weight: 900;
   line-height: 0.85;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.12);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.45);
   letter-spacing: -0.03em;
   user-select: none;
 }
