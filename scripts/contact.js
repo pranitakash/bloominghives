@@ -110,10 +110,10 @@ window.addEventListener('load', () => {
     duration: 1,
   }, '-=0.8');
 
-  // Form elements entry
-  gsap.from('.interests-container > *', {
+  // Form elements entry (interests now in hero)
+  gsap.from('.contact-hero__interests > *', {
     scrollTrigger: {
-      trigger: '.interests-container',
+      trigger: '.contact-hero__interests',
       start: 'top 85%',
     },
     y: 30,

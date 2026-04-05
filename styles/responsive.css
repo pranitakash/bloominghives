@@ -114,9 +114,25 @@
   }
 
   /* Approach */
+  .approach__block {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
   .approach__block--right {
-    align-self: flex-start;
     text-align: left;
+  }
+
+  .approach__block--right .approach__visual {
+    order: 2;
+  }
+
+  .approach__block--right .approach__text {
+    order: 1;
+  }
+
+  .approach__img {
+    max-width: 220px;
   }
 
   /* Work intro */

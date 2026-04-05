@@ -15,7 +15,7 @@
    PAGE GLOBALS
    ═══════════════════════════════════════════════════ */
 body.blog-page {
-  background: #f5f2ed;
+  background: transparent;
   color: #1a1a1a;
 }
 
@@ -315,7 +315,7 @@ body.blog-page {
    ═══════════════════════════════════════════════════ */
 .blog-newsletter {
   padding: clamp(80px, 10vw, 140px) var(--container-pad);
-  background: #f6f4f0;
+  background: transparent;
 }
 
 .blog-newsletter__inner {

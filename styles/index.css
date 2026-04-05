@@ -687,20 +687,47 @@ button {
    ═══════════════════════════════════════════════════ */
 .approach {
   padding: var(--section-pad) var(--container-pad);
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(60px, 8vw, 100px);
+  gap: clamp(40px, 6vw, 80px);
 }
 
 .approach__block {
-  max-width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
 }
 
 .approach__block--right {
-  align-self: flex-end;
   text-align: right;
+}
+
+.approach__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.approach__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.approach__img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  opacity: 0.85;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  filter: brightness(1.1);
+}
+
+.approach__block:hover .approach__img {
+  transform: scale(1.08);
+  opacity: 1;
 }
 
 .approach__number {
@@ -907,17 +934,27 @@ button {
 .results__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto auto;
-  gap: 20px;
+  grid-template-rows: repeat(2, minmax(240px, auto));
+  gap: 24px;
 }
 
-/* Bento: first card spans 2 cols, last card spans 2 cols */
+/* Left large card */
 .results__card:nth-child(1) {
   grid-column: span 2;
+  grid-row: span 2;
 }
 
+/* Top right square cards */
+.results__card:nth-child(2),
+.results__card:nth-child(3) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Bottom right wide card */
 .results__card:nth-child(4) {
   grid-column: span 2;
+  grid-row: span 1;
 }
 
 .results__card {
@@ -934,6 +971,10 @@ button {
     0 4px 30px rgba(0,0,0,0.15),
     inset 0 1px 0 rgba(255,255,255,0.06);
   transition: all 0.5s var(--ease);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .results__card:hover {
@@ -945,13 +986,21 @@ button {
   transform: translateY(-4px);
 }
 
-/* Wide cards get left-aligned text for visual variety */
-.results__card:nth-child(1),
-.results__card:nth-child(4) {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  text-align: left;
+.results__card-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 120%;
+  opacity: 0.05; /* Fade out so text is readable */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.results__stat, .results__label, .results__context {
+  position: relative;
+  z-index: 1;
 }
 
 .results__stat {
@@ -965,17 +1014,19 @@ button {
   background-clip: text;
 }
 
-/* In wide cards, remove bottom margin on stat since they're side-by-side */
-.results__card:nth-child(1) .results__stat,
-.results__card:nth-child(4) .results__stat {
-  margin-bottom: 0;
-  flex-shrink: 0;
+.results__label {
+  font-size: var(--font-body);
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 
-.results__label {
+.results__context {
   font-size: var(--font-small);
   color: var(--color-text-muted);
-  line-height: 1.5;
+  line-height: 1.6;
+  max-width: 90%;
 }
 
 .results__gradient-arc {
@@ -1464,3 +1515,4 @@ button {
 .floating-cta:hover svg {
   transform: translateX(4px);
 }
+

@@ -17,15 +17,16 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   HERO SECTION
+   HERO SECTION (Unified: heading + interests + form)
    ═══════════════════════════════════════════════════ */
 .contact-hero {
   position: relative;
-  height: 90vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: 0 clamp(20px, 6vw, 100px);
+  align-items: flex-start;
+  padding: clamp(140px, 14vh, 200px) clamp(20px, 6vw, 100px) clamp(100px, 8vw, 140px);
   overflow: hidden;
+  background: var(--color-contact-bg);
 }
 
 .contact-hero__bg {
@@ -44,15 +45,18 @@
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .contact-hero__title {
   font-family: var(--font-hero);
-  font-size: clamp(3.5rem, 10vw, 8.5rem);
+  font-size: clamp(3.5rem, 9vw, 8rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.045em;
   text-transform: capitalize;
+  margin-bottom: clamp(80px, 10vh, 160px);
 }
 
 .title-line {
@@ -71,36 +75,17 @@
   will-change: transform, opacity;
 }
 
-.contact-hero__scroll {
-  position: absolute;
-  bottom: 40px;
-  right: clamp(20px, 6vw, 100px);
-  width: clamp(60px, 8vw, 120px);
-  height: clamp(60px, 8vw, 120px);
-  color: var(--color-contact-text);
-  opacity: 0.3;
+/* ── Interests Row (interests left + arrow right) ── */
+.contact-hero__interests-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: clamp(60px, 6vw, 100px);
 }
 
-/* ═══════════════════════════════════════════════════
-   FORM SECTION
-   ═══════════════════════════════════════════════════ */
-.form-section {
-  padding: 120px clamp(20px, 6vw, 100px);
-  background: white;
-  border-radius: 40px 40px 0 0;
-  position: relative;
-  z-index: 2;
-  margin-top: -40px;
-}
-
-.form-container {
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-/* Interest Chips */
-.interests-container {
-  margin-bottom: 80px;
+.contact-hero__interests {
+  flex: 1;
+  min-width: 0;
 }
 
 .interests-title {
@@ -119,24 +104,57 @@
 .interest-chip {
   padding: 14px 28px;
   border-radius: 50px;
-  border: 1.5px solid rgba(0,0,0,0.1);
+  border: 1.5px solid rgba(0,0,0,0.15);
   background: transparent;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.interest-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-contact-text);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out-expo);
+  z-index: -1;
 }
 
 .interest-chip:hover {
-  border-color: rgba(0,0,0,0.3);
+  border-color: var(--color-contact-text);
+  color: #fff;
   transform: translateY(-2px);
+}
+
+.interest-chip:hover::after {
+  transform: scaleX(1);
 }
 
 .interest-chip.active {
   background: var(--color-contact-text);
   color: white;
   border-color: var(--color-contact-text);
+}
+
+.interest-chip.active::after {
+  transform: scaleX(1);
+}
+
+/* ── Hero Arrow (sits in interests-row, right side) ── */
+.contact-hero__scroll {
+  flex-shrink: 0;
+  width: clamp(60px, 7vw, 100px);
+  height: clamp(60px, 7vw, 100px);
+  color: var(--color-contact-text);
+  opacity: 0.2;
 }
 
 /* Form Layout */
@@ -264,63 +282,80 @@
    CONTACT INFO SPLIT (Kota Style)
    ═══════════════════════════════════════════════════ */
 .contact-info-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 480px;
-  margin-top: 80px;
+  background: #0a0a0a;
+  padding: clamp(60px, 8vw, 120px) clamp(20px, 6vw, 100px);
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.info-split__left {
-  background: #f2f2f2;
-  padding: clamp(48px, 6vw, 100px);
+.info-split__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  max-width: 1600px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ── White Office Card ── */
+.info-split__card {
+  background: #ffffff;
+  padding: clamp(48px, 5vw, 80px);
+  border-radius: 16px 100px 16px 16px;
+  color: #1a1a1a;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  color: #1a1a1a;
-  border-radius: 24px 0 0 24px;
+  min-height: 480px;
+  position: relative;
 }
 
 .info-split__offices {
   display: flex;
-  gap: clamp(40px, 6vw, 100px);
+  gap: clamp(40px, 5vw, 80px);
   margin-bottom: 48px;
 }
 
 .info-split__city {
+  font-family: var(--font-hero);
   font-size: clamp(1.6rem, 2.5vw, 2.2rem);
   font-weight: 800;
   margin-bottom: 16px;
   letter-spacing: -0.02em;
+  color: #1a1a1a;
 }
 
 .info-split__office p {
   font-size: 0.95rem;
-  line-height: 1.5;
-  color: rgba(26,26,26,0.7);
+  line-height: 1.6;
+  color: rgba(26,26,26,0.6);
+  font-weight: 400;
 }
 
 .info-split__phone {
+  font-family: var(--font-hero);
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   font-weight: 800;
   color: #1a1a1a;
   letter-spacing: -0.02em;
-  margin-bottom: 32px;
+  margin-top: auto;
+  margin-bottom: 40px;
   display: block;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s var(--ease-out-expo);
 }
 
 .info-split__phone:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .info-split__faq {
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .info-split__faq p {
-  font-size: 0.95rem;
-  color: rgba(26,26,26,0.6);
-  line-height: 1.6;
+  font-size: 0.9rem;
+  color: rgba(26,26,26,0.5);
+  line-height: 1.7;
 }
 
 .info-split__faq-link {
@@ -328,64 +363,69 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 600;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s var(--ease-out-expo);
 }
 
 .info-split__faq-link:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
-.info-split__right {
-  background: #0a0a0a;
-  padding: clamp(48px, 6vw, 100px);
+/* ── Contact Details (Right Side) ── */
+.info-split__contact {
+  padding: clamp(24px, 4vw, 60px) 0;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 0 24px 24px 0;
 }
 
 .info-split__email-block {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .info-split__email-label {
   display: block;
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
   text-transform: capitalize;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .info-split__email-link {
-  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  font-family: var(--font-hero);
+  font-size: clamp(1.4rem, 2.8vw, 2.6rem);
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.02em;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s var(--ease-out-expo);
   display: block;
+  line-height: 1.2;
 }
 
 .info-split__email-link:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .info-split__social-block {
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
 .info-split__social-title {
+  font-family: var(--font-hero);
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 16px;
+  color: #fff;
 }
 
 .info-split__social-item {
   display: block;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.7);
-  padding: 6px 0;
-  transition: color 0.3s ease;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.6);
+  padding: 8px 0;
+  transition: color 0.4s var(--ease-out-expo);
   font-weight: 500;
 }
 
@@ -443,16 +483,30 @@
   .main-form { gap: 40px; }
   .contact-hero__title { font-size: clamp(3rem, 12vw, 5rem); }
 
-  .contact-info-split {
+  .contact-hero {
+    padding-bottom: clamp(60px, 6vw, 100px);
+  }
+
+  .contact-hero__interests-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-hero__scroll {
+    display: none;
+  }
+
+  .info-split__inner {
     grid-template-columns: 1fr;
   }
 
-  .info-split__left {
-    border-radius: 24px 24px 0 0;
+  .info-split__card {
+    border-radius: 16px 80px 16px 16px;
+    min-height: auto;
   }
 
-  .info-split__right {
-    border-radius: 0 0 24px 24px;
+  .info-split__contact {
+    padding: 0 0 20px 0;
   }
 }
 
@@ -460,5 +514,10 @@
   .info-split__offices {
     flex-direction: column;
     gap: 32px;
+  }
+
+  .info-split__card {
+    border-radius: 12px 60px 12px 12px;
+    padding: 36px;
   }
 }
