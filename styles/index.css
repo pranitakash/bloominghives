@@ -398,7 +398,7 @@ button {
 }
 
 .menu-overlay__list li.expanded .menu-overlay__sublist {
-  max-height: 200px;
+  max-height: 400px;
   margin-bottom: 8px;
 }
 
@@ -614,10 +614,15 @@ button {
   transform-origin: center top;
 }
 
-/* Each card: top offset + card height + bottom gap ≤ 100vh */
+/* Each card: staggered top offset + z-index for sticky stack */
 .service-card:nth-child(1) { top: 40px; z-index: 1; height: calc(100vh - 80px); }
-.service-card:nth-child(2) { top: 60px; z-index: 2; height: calc(100vh - 100px); }
-.service-card:nth-child(3) { top: 80px; z-index: 3; height: calc(100vh - 120px); }
+.service-card:nth-child(2) { top: 50px; z-index: 2; height: calc(100vh - 90px); }
+.service-card:nth-child(3) { top: 60px; z-index: 3; height: calc(100vh - 100px); }
+.service-card:nth-child(4) { top: 70px; z-index: 4; height: calc(100vh - 110px); }
+.service-card:nth-child(5) { top: 80px; z-index: 5; height: calc(100vh - 120px); }
+.service-card:nth-child(6) { top: 90px; z-index: 6; height: calc(100vh - 130px); }
+.service-card:nth-child(7) { top: 100px; z-index: 7; height: calc(100vh - 140px); }
+.service-card:nth-child(8) { top: 110px; z-index: 8; height: calc(100vh - 150px); }
 
 .service-card__content {
   padding: clamp(40px, 5vw, 72px);
