@@ -532,7 +532,7 @@ button {
    SERVICES — Sticky Card Stack (Kota Style)
    ═══════════════════════════════════════════════════ */
 .services {
-  padding: 0 clamp(16px, 2vw, 32px);
+  padding: 0 clamp(20px, 3vw, 48px);
   max-width: 1800px;
   margin: 0 auto;
   position: relative;
@@ -544,18 +544,20 @@ button {
   background: var(--color-bg-light);
   border-radius: 28px;
   overflow: hidden;
-  min-height: 88vh;
+  height: calc(100vh - 100px);
+  max-height: 800px;
   position: sticky;
   top: 80px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   box-shadow: 0 -20px 80px rgba(0,0,0,0.3);
   will-change: transform;
   transform-origin: center top;
 }
 
-.service-card:nth-child(1) { top: 60px; z-index: 1; }
-.service-card:nth-child(2) { top: 80px; z-index: 2; }
-.service-card:nth-child(3) { top: 100px; z-index: 3; }
+/* Each card: top offset + card height + bottom gap ≤ 100vh */
+.service-card:nth-child(1) { top: 40px; z-index: 1; height: calc(100vh - 80px); }
+.service-card:nth-child(2) { top: 60px; z-index: 2; height: calc(100vh - 100px); }
+.service-card:nth-child(3) { top: 80px; z-index: 3; height: calc(100vh - 120px); }
 
 .service-card__content {
   padding: clamp(40px, 5vw, 72px);
