@@ -61,7 +61,7 @@ export default function Contact() {
             </div>
             <div className="contact-hero__scroll">
               <svg viewBox="0 0 100 100" className="hero-arrow">
-                <path d="M20 20 L80 80 M80 30 L80 80 L30 80" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M20 20 L80 80 M80 30 L80 80 L30 80" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>
