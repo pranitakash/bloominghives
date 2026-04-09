@@ -234,12 +234,12 @@ body.service-page .site-header {
 
 /* ═══════ Z-PATTERN FEATURE SECTIONS ═══════ */
 .service-detail {
-  padding: clamp(60px, 10vw, 140px) clamp(24px, 5vw, 80px);
-  max-width: 1400px;
+  padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 80px);
+  max-width: 1600px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(48px, 6vw, 100px);
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(40px, 5vw, 80px);
   align-items: center;
 }
 
@@ -302,7 +302,7 @@ body.service-page .site-header {
   position: relative;
   border-radius: 200px 0 0 0;
   overflow: hidden;
-  aspect-ratio: 4/5;
+  min-height: 520px;
 }
 
 .service-detail--reverse .service-detail__visual {
@@ -318,11 +318,11 @@ body.service-page .site-header {
 .service-detail__visual img {
   position: relative;
   z-index: 1;
-  width: 90%;
+  width: 88%;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.12);
-  margin: 40px auto 0;
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+  margin: 32px auto 0;
   display: block;
 }
 
@@ -642,7 +642,7 @@ body.service-page .site-header {
   }
 
   .service-detail__visual {
-    aspect-ratio: 16/10;
+    min-height: 380px;
   }
 
   .service-showcase__grid {
@@ -680,7 +680,7 @@ body.service-page .site-header {
 
   .service-detail__visual {
     border-radius: 100px 0 0 0 !important;
-    aspect-ratio: 4/3;
+    min-height: 300px;
   }
 
   .service-showcase__grid {
