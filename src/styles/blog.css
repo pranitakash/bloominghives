@@ -198,39 +198,20 @@
   font-size: 0.92rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
-  position: relative;
-  overflow: hidden;
-}
-
-.filter-chip::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #1a1a1a;
-  border-radius: inherit;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease-out-expo);
-  z-index: -1;
+  transition: background 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
 }
 
 .filter-chip:hover {
+  background: #1a1a1a;
   color: #fff;
-}
-
-.filter-chip:hover::after {
-  transform: scaleX(1);
+  border-color: #1a1a1a;
+  transform: scale(1.04);
 }
 
 .filter-chip.active {
   background: #1a1a1a;
   color: #fff;
   border-color: #1a1a1a;
-}
-
-.filter-chip.active::after {
-  transform: scaleX(1);
 }
 
 /* ═══════════════════════════════════════════════════

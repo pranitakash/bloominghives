@@ -46,9 +46,9 @@ export default function Blog() {
       gsap.from(card, { y: 50, opacity: 0, duration: 0.7, delay: i * 0.08, ease, scrollTrigger: { trigger: card, start: 'top 85%' } });
     });
 
-    const footerBlob = document.querySelector('.footer__blob-visual');
-    if (footerBlob) {
-      gsap.from(footerBlob, { scale: 0, opacity: 0, duration: 1.5, ease: 'elastic.out(1, 0.4)', scrollTrigger: { trigger: '.footer__blob', start: 'top 85%' } });
+    const footerGlobe = document.querySelector('.footer__globe');
+    if (footerGlobe) {
+      gsap.from(footerGlobe, { y: 40, opacity: 0, duration: 1.2, ease, scrollTrigger: { trigger: '.footer__globe', start: 'top 85%' } });
     }
   });
 

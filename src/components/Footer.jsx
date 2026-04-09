@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import Globe from './Globe';
 
 export default function Footer({ wrapDark = false }) {
   const footer = (
     <footer className="site-footer" id="footer">
-      <div className="footer__blob">
-        <div className="footer__blob-visual"></div>
+      <div className="footer__globe">
+        <Globe />
       </div>
 
       <div className="footer__main">

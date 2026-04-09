@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import ArrowIcon from './ArrowIcon';
 
-export default function Header({ onLight = false, onToggleMenu }) {
+export default function Header({ onToggleMenu, menuOpen = false }) {
   return (
-    <header className={`site-header${onLight ? ' header--on-light' : ''}`} id="site-header">
+    <header className={`site-header${menuOpen ? ' menu-active' : ''}`} id="site-header">
       <div className="header-inner">
         <Link to="/" className="logo" id="logo" aria-label="Blooming Hives Home">
           <svg viewBox="0 0 60 60" className="logo-svg">
@@ -16,9 +16,26 @@ export default function Header({ onLight = false, onToggleMenu }) {
             <span>Get Started</span>
             <ArrowIcon />
           </Link>
-          <button className="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" onClick={onToggleMenu}>
-            <span className="menu-toggle__line"></span>
-            <span className="menu-toggle__line"></span>
+          <button
+            className={`menu-toggle${menuOpen ? ' active' : ''}`}
+            id="menu-toggle"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={onToggleMenu}
+          >
+            {menuOpen ? (
+              /* X / Close icon */
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="menu-toggle__icon">
+                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+              </svg>
+            ) : (
+              /* Hamburger lines */
+              <>
+                <span className="menu-toggle__line"></span>
+                <span className="menu-toggle__line"></span>
+              </>
+            )}
           </button>
         </div>
       </div>

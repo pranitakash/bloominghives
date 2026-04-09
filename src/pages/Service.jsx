@@ -89,16 +89,16 @@ export default function Service() {
     });
 
     // Footer
-    const footerBlob = document.querySelector('.footer__blob-visual');
-    if (footerBlob) {
-      gsap.from(footerBlob, { scale: 0, opacity: 0, duration: 1.5, ease: 'elastic.out(1, 0.4)', scrollTrigger: { trigger: '.footer__blob', start: 'top 85%' } });
+    const footerGlobe = document.querySelector('.footer__globe');
+    if (footerGlobe) {
+      gsap.from(footerGlobe, { y: 40, opacity: 0, duration: 1.2, ease, scrollTrigger: { trigger: '.footer__globe', start: 'top 85%' } });
     }
   }, [slug]);
 
   if (!data) return <Navigate to="/" replace />;
 
   return (
-    <div className="service-page" ref={containerRef} key={slug}>
+    <div className="service-page" ref={containerRef} key={slug} data-theme="light">
       {/* HERO */}
       <section className="service-hero">
         <div className="service-hero__image">

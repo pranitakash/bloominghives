@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import useLenis from './hooks/useLenis';
+import useHeaderTheme from './hooks/useHeaderTheme';
 import Header from './components/Header';
 import MenuOverlay from './components/MenuOverlay';
 import Footer from './components/Footer';
@@ -24,16 +25,14 @@ export default function App() {
   const location = useLocation();
 
   useLenis();
+  useHeaderTheme();
 
   // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  // Determine if header should be on-light
-  const isServicePage = location.pathname.startsWith('/service');
   const isHome = location.pathname === '/';
-  const headerOnLight = isServicePage;
 
   // Determine if footer needs dark wrapper (non-home pages)
   const footerWrapDark = !isHome;
@@ -43,7 +42,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <Header onLight={headerOnLight} onToggleMenu={toggleMenu} />
+      <Header onToggleMenu={toggleMenu} menuOpen={menuOpen} />
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       <Routes>

@@ -55,10 +55,9 @@ export default function About() {
     gsap.from('.about-cta__title', { yPercent: 50, opacity: 0, duration: 1, ease, scrollTrigger: { trigger: '.about-cta', start: 'top 80%' } });
 
     // Footer blob
-    const footerBlob = document.querySelector('.footer__blob-visual');
-    if (footerBlob) {
-      gsap.from(footerBlob, { scale: 0, opacity: 0, duration: 1.5, ease: 'elastic.out(1, 0.4)', scrollTrigger: { trigger: '.footer__blob', start: 'top 85%' } });
-      gsap.to(footerBlob, { rotation: 360, ease: 'none', scrollTrigger: { trigger: '.footer__blob', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    const footerGlobe = document.querySelector('.footer__globe');
+    if (footerGlobe) {
+      gsap.from(footerGlobe, { y: 40, opacity: 0, duration: 1.2, ease, scrollTrigger: { trigger: '.footer__globe', start: 'top 85%' } });
     }
   });
 
