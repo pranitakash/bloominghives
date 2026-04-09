@@ -4,12 +4,12 @@
    ═══════════════════════════════════════════════════ */
 
 /* ═══════ PAGE GLOBALS ═══════ */
-body.service-page {
+.service-page {
   background: #f4f2ee;
   color: #1a1a1a;
 }
 
-body.service-page .site-header {
+.service-page .site-header {
   mix-blend-mode: normal;
 }
 
@@ -601,8 +601,8 @@ body.service-page .site-header {
 }
 
 /* ═══════ FOOTER OVERRIDE ═══════ */
-.service-page .footer-dark-wrapper,
-.service-page .site-footer {
+.service-page ~ .footer-dark-wrapper,
+.service-page ~ .footer-dark-wrapper .site-footer {
   background: #1a1a1a;
   color: #fff;
 }
