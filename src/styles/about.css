@@ -335,6 +335,12 @@
   color: #ffffff !important;
 }
 
+.footer-dark-wrapper .pill--dark:hover {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #ffffff !important;
+}
+
 .footer-dark-wrapper .logo-svg {
   color: #ffffff !important;
 }

@@ -35,7 +35,7 @@
   z-index: 0;
 }
 
-#contact-bg-canvas {
+.contact-hero__bg canvas {
   width: 100%;
   height: 100%;
   display: block;
@@ -59,7 +59,7 @@
   margin-bottom: clamp(80px, 10vh, 160px);
 }
 
-.title-line {
+.contact-page .title-line {
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
@@ -68,7 +68,7 @@
   padding-bottom: 0.1em;
 }
 
-.title-line span {
+.contact-page .title-line span {
   display: inline-block;
   transform: translateY(105%);
   opacity: 0;
@@ -461,6 +461,12 @@
 .footer-dark-wrapper .footer__badge-item,
 .footer-dark-wrapper .pill--dark {
   color: #ffffff !important;
+}
+
+.footer-dark-wrapper .pill--dark:hover {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #ffffff !important;
 }
 
 .footer-dark-wrapper .logo-svg {

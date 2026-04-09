@@ -14,8 +14,8 @@
 /* ═══════════════════════════════════════════════════
    PAGE GLOBALS
    ═══════════════════════════════════════════════════ */
-body.blog-page {
-  background: transparent;
+.blog-page {
+  background: #f8f8f8;
   color: #1a1a1a;
 }
 
@@ -415,6 +415,12 @@ body.blog-page {
 .footer-dark-wrapper .footer__badge-item,
 .footer-dark-wrapper .pill--dark {
   color: #ffffff !important;
+}
+
+.footer-dark-wrapper .pill--dark:hover {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #ffffff !important;
 }
 
 .footer-dark-wrapper .logo-svg {
