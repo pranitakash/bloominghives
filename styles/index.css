@@ -135,15 +135,36 @@ button {
   color: var(--color-text);
 }
 
+/* ─── "Find out more" outline buttons ─── */
 .btn-pill--outline {
   background: transparent;
   color: var(--color-text-dark);
   border: 1.5px solid rgba(0,0,0,0.2);
+  position: relative;
+  overflow: visible;
 }
+
+.btn-pill--outline svg {
+  transition: transform 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.4s var(--ease), border-radius 0.4s var(--ease);
+  border-radius: 0;
+  padding: 0;
+  border: 1.5px solid transparent;
+}
+
 .btn-pill--outline:hover {
-  border-color: var(--color-text-dark);
-  background: var(--color-text-dark);
-  color: var(--color-text);
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-text-dark);
+  gap: 12px;
+}
+
+.btn-pill--outline:hover svg {
+  transform: translateX(0);
+  background: transparent;
+  border: 1.5px solid var(--color-text-dark);
+  border-radius: 50%;
+  padding: 6px;
+  box-sizing: content-box;
 }
 
 .btn-pill--light {
@@ -154,6 +175,19 @@ button {
   border-color: var(--color-text);
   background: var(--color-text);
   color: var(--color-bg);
+}
+
+/* Override: light outline buttons revert to standard fill hover */
+.btn-pill--outline.btn-pill--light:hover {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+.btn-pill--outline.btn-pill--light:hover svg {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  transform: translateX(4px);
 }
 
 .btn-pill--small {
@@ -190,9 +224,9 @@ button {
   color: var(--color-text);
 }
 .pill--dark:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
-  border-color: var(--color-text);
+  background: var(--color-text) !important;
+  color: var(--color-bg) !important;
+  border-color: var(--color-text) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -385,7 +419,13 @@ button {
 }
 
 .menu-overlay__list li.expanded .menu-plus {
-  transform: rotate(45deg);
+  font-size: 0;
+  /* The + becomes invisible */
+}
+
+.menu-overlay__list li.expanded .menu-plus::after {
+  content: '–';
+  font-size: 0.9rem;
 }
 
 .menu-overlay__sublist {
@@ -406,14 +446,16 @@ button {
   font-size: 0.9rem;
   font-weight: 400;
   color: rgba(26,26,26,0.55);
-  display: block;
-  padding: 5px 0;
-  transition: color 0.3s, transform 0.3s var(--ease);
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  transition: color 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .menu-overlay__sublist a:hover {
   color: var(--color-text-dark);
-  transform: translateX(4px);
+  background: rgba(26,26,26,0.08);
+  transform: translateX(2px);
 }
 
 /* Menu backdrop */

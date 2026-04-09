@@ -136,11 +136,17 @@
 .btn-pill {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.3s,
-              border-color 0.3s;
+              border-color 0.3s,
+              gap 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-pill:hover {
   transform: translateY(-2px);
+}
+
+/* Outline buttons use arrow-circle hover, no lift */
+.btn-pill--outline:hover {
+  transform: none;
 }
 
 /* ─── Project Card Lift ─── */
