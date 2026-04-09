@@ -1433,22 +1433,20 @@ button {
 .footer__blob {
   display: flex;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  height: 320px;
+  padding: 60px 0;
 }
 
-.footer__globe-canvas {
-  width: 530px;
-  height: 530px;
-  max-width: 100vw;
-  position: absolute;
-  top: 20px;
-  cursor: grab;
-}
-
-.footer__globe-canvas:active {
-  cursor: grabbing;
+.footer__blob-visual {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(96, 165, 250, 0.7), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(167, 139, 250, 0.6), transparent 50%),
+    radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.5), transparent 50%);
+  filter: blur(2px);
+  animation: blobPulse 8s ease-in-out infinite;
+  box-shadow: 0 0 80px rgba(167, 139, 250, 0.2);
 }
 
 .footer__main {
