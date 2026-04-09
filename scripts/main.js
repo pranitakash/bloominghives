@@ -251,12 +251,8 @@ heroTl
     scale: 0, opacity: 0, duration: 1, ease: 'elastic.out(1, 0.5)'
   }, '-=1');
 
-// ─── Services Intro — Mask reveal ───
-createMaskReveal('.services-intro .outline-text', {
-  trigger: '.services-intro',
-  start: 'top 80%',
-  duration: 1.2,
-});
+// ─── Services Intro — Description reveal ───
+// Note: .outline-text reveal handled by generic handler below
 
 gsap.from('.services-intro__desc', {
   y: 30, opacity: 0, duration: 0.9, ease,
