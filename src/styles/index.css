@@ -205,7 +205,10 @@ button {
   background: transparent;
   color: var(--color-text-dark);
   border: 1.5px solid rgba(0, 0, 0, 0.2);
-  margin-top: 40px;
+  margin-top: 32px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  align-self: flex-start;
 }
 
 /* ─── Utility: Pills / Tags ─── */
@@ -446,7 +449,10 @@ button {
 }
 
 .menu-overlay__inner {
-  padding: 48px 36px 36px;
+  padding: 80px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .menu-overlay__list {
