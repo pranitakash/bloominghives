@@ -49,10 +49,10 @@ export default function Globe({ className = '' }) {
       mapSamples: 16000,
       mapBrightness: 6,
       baseColor: [0.3, 0.3, 0.3],
-      markerColor: [0.6, 0.4, 1],
+      markerColor: [1, 0.5, 0.1],
       glowColor: [1, 1, 1],
       scale: 1,
-      offset: [0, 0],
+      offset: [0, width * 0.35],
       markers: [
         { location: [28.6139, 77.209], size: 0.12 },
         { location: [19.076, 72.8777], size: 0.08 },

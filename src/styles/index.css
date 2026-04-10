@@ -1476,8 +1476,8 @@ button {
 .footer__globe {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 40px 0 0;
+  align-items: flex-start;
+  padding: 0;
   position: relative;
   overflow: hidden;
 }
@@ -1488,23 +1488,23 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40%;
-  background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+  height: 50%;
+  background: linear-gradient(to top, var(--color-bg) 10%, transparent 100%);
   pointer-events: none;
   z-index: 1;
 }
 
 /* Globe component styles */
 .globe-wrapper {
-  width: 340px;
-  height: 340px;
+  width: 700px;
+  height: 520px;
   position: relative;
-  aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .globe-canvas {
-  width: 100%;
-  height: 100%;
+  width: 700px;
+  height: 700px;
   opacity: 0;
   transition: opacity 0.8s ease;
   cursor: grab;
