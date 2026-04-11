@@ -2,6 +2,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import createGlobe from 'cobe';
 
 const MOVEMENT_DAMPING = 1400;
+const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
 export default function Globe({ className = '' }) {
   const canvasRef = useRef(null);
@@ -9,6 +10,7 @@ export default function Globe({ className = '' }) {
   const pointerInteracting = useRef(null);
   const springValue = useRef(0);
   const springTarget = useRef(0);
+  const isVisibleRef = useRef(false);
 
   const updatePointerInteraction = useCallback((value) => {
     pointerInteracting.current = value;
@@ -38,15 +40,24 @@ export default function Globe({ className = '' }) {
     window.addEventListener('resize', onResize);
     onResize();
 
+    // Only render when the globe is visible in the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0, rootMargin: '100px' }
+    );
+    observer.observe(canvas);
+
     const globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
-      width: width * 2,
-      height: width * 2,
+      devicePixelRatio: DPR,
+      width: width * DPR,
+      height: width * DPR,
       phi: 0,
       theta: 0.3,
       dark: 1,
       diffuse: 1.2,
-      mapSamples: 16000,
+      mapSamples: 12000,
       mapBrightness: 6,
       baseColor: [0.3, 0.3, 0.3],
       markerColor: [1, 0.5, 0.1],
@@ -66,14 +77,17 @@ export default function Globe({ className = '' }) {
         { location: [35.6762, 139.6503], size: 0.05 },
       ],
       onRender: (state) => {
+        // Skip heavy rendering when globe is not visible
+        if (!isVisibleRef.current) return;
+
         if (!pointerInteracting.current) {
           phiRef.current += 0.005;
         }
         springValue.current += (springTarget.current - springValue.current) * 0.08;
 
         state.phi = phiRef.current + springValue.current;
-        state.width = width * 2;
-        state.height = width * 2;
+        state.width = width * DPR;
+        state.height = width * DPR;
       },
     });
 
@@ -83,6 +97,7 @@ export default function Globe({ className = '' }) {
 
     return () => {
       globe.destroy();
+      observer.disconnect();
       window.removeEventListener('resize', onResize);
     };
   }, []);

@@ -30,9 +30,15 @@ export default function Blog() {
   const canvasRef = useHeroCanvas('#f0ede8', 'multiply', 0.2);
 
   useEffect(() => {
+    let ticking = false;
     const handle = () => {
-      const el = document.getElementById('floating-cta');
-      if (el) el.classList.toggle('visible', window.scrollY > window.innerHeight * 0.4);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const el = document.getElementById('floating-cta');
+        if (el) el.classList.toggle('visible', window.scrollY > window.innerHeight * 0.4);
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', handle, { passive: true });
     return () => window.removeEventListener('scroll', handle);

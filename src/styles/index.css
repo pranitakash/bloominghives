@@ -78,6 +78,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -86,6 +87,7 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 a {
@@ -116,7 +118,7 @@ button {
   font-size: var(--font-small);
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: all var(--duration) var(--ease);
+  transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), gap var(--duration) var(--ease);
   white-space: nowrap;
 }
 
@@ -220,7 +222,7 @@ button {
   font-size: var(--font-small);
   font-weight: 400;
   color: var(--color-text-dark);
-  transition: all 0.3s var(--ease);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 
 .pill:hover {
@@ -250,7 +252,7 @@ button {
   right: 0;
   z-index: 1000;
   padding: 20px var(--container-pad);
-  transition: all 0.4s var(--ease);
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
 }
 
 .site-header::after {
@@ -313,7 +315,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: all 0.3s var(--ease);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
   position: relative;
 }
 
@@ -333,7 +335,7 @@ button {
   width: 18px;
   height: 1.5px;
   background: var(--color-text);
-  transition: all 0.4s var(--ease);
+  transition: background 0.4s var(--ease), transform 0.4s var(--ease);
   transform-origin: center;
 }
 
@@ -525,13 +527,11 @@ button {
 .menu-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 998;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
 }
 
 .menu-backdrop.visible {
@@ -562,6 +562,7 @@ button {
     radial-gradient(ellipse 40% 40% at 80% 60%, rgba(249, 168, 212, 0.15), transparent),
     linear-gradient(135deg, #e8e0d4 0%, #d4cfc8 20%, #c8d0dc 40%, #b8c8e0 60%, #d0b8d8 80%, #e0c8d0 100%);
   z-index: 0;
+  contain: layout paint;
 }
 
 .hero__content {
@@ -717,6 +718,7 @@ button {
   box-shadow: 0 -20px 80px rgba(0, 0, 0, 0.3);
   will-change: transform;
   transform-origin: center top;
+  contain: layout style;
 }
 
 /* Each card: staggered top offset + z-index for sticky stack */
@@ -953,15 +955,14 @@ button {
   display: block;
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(22, 22, 22, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.5s var(--ease);
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.5s var(--ease);
+  contain: layout style;
 }
 
 .project-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(30, 30, 30, 0.95);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-4px);
 }
@@ -1097,23 +1098,22 @@ button {
 
 .results__card {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(22, 22, 22, 0.85);
   border-radius: 16px;
   padding: 48px 36px;
   text-align: center;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.5s var(--ease);
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.4s var(--ease);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  contain: layout style;
 }
 
 .results__card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(30, 30, 30, 0.95);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-4px);
 }
@@ -1258,7 +1258,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s var(--ease);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
   color: var(--color-text);
 }
 
@@ -1336,16 +1336,15 @@ button {
 .article-card {
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(22, 22, 22, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.5s var(--ease);
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.5s var(--ease);
   cursor: pointer;
+  contain: layout style;
 }
 
 .article-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(30, 30, 30, 0.95);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-4px);
 }
@@ -1506,6 +1505,7 @@ button {
   height: 520px;
   position: relative;
   overflow: hidden;
+  contain: layout paint size;
 }
 
 .globe-canvas {
@@ -1652,7 +1652,8 @@ button {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transform: translateY(100px);
   opacity: 0;
-  transition: all 0.5s var(--ease);
+  transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  will-change: transform, opacity;
 }
 
 .floating-cta.visible {

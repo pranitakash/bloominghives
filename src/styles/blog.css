@@ -87,7 +87,6 @@
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: capitalize;
-  backdrop-filter: blur(6px);
   transition: transform 0.4s var(--ease-out-expo), background 0.3s ease;
 }
 
@@ -360,7 +359,7 @@
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
+  transition: background 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
   white-space: nowrap;
 }
 

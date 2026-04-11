@@ -1,0 +1,64 @@
+﻿
+## 📋 COMPLETE IMAGE INDEX
+
+| # | Filename | Accent Color | Page |
+|---|----------|-------------|------|
+| 01 | `service-social.png` | Electric Blue | Home + SMM |
+| 02 | `service-seo.png` | Emerald Green | Home + SEO |
+| 03 | `service-webdev.png` | Cobalt Blue | Home + WebDev |
+| 04 | `service-ads.png` | Coral Red | Home + Ads |
+| 05 | `service-content.png` | Warm Amber | Home + Content |
+| 06 | `service-video.png` | Electric Purple | Home + Video |
+| 07 | `service-graphic.png` | Coral Red | Home + Graphic |
+| 08 | `service-photoshoot.png` | Amber Gold | Home + Photo |
+| 09 | `illus1-strategy.png` | Electric Blue | Home process |
+| 10 | `illus2-process.png` | Electric Blue | Home process |
+| 11 | `illus3-scale.png` | Electric Blue | Home process |
+| 12 | `illus4-convert.png` | Coral Red | Home process |
+| 13 | `project-restaurant.png` | Warm Amber | Portfolio |
+| 14 | `project-realestate.png` | Electric Blue | Portfolio |
+| 15 | `project-ecommerce.png` | Coral Red | Portfolio |
+| 16 | `project-event.png` | Electric Purple | Portfolio |
+| 17 | `project-healthcare.png` | Emerald Green | Portfolio |
+| 18 | `icon-leads.png` | Electric Blue | Stats |
+| 19 | `icon-rating.png` | Amber Gold | Stats |
+| 20 | `icon-retention.png` | Emerald Green | Stats |
+| 21 | `icon-roi.png` | Coral Red | Stats |
+| 22 | `article-meta-ads.png` | Coral Red | Blog thumb |
+| 23 | `article-social-strategy.png` | Electric Blue | Blog thumb |
+| 24 | `article-seo-2025.png` | Emerald Green | Blog thumb |
+| 25 | `smm-content-strategy.png` | Electric Blue | SMM page |
+| 26 | `smm-creative-content.png` | Electric Blue | SMM page |
+| 27 | `smm-community.png` | Electric Blue | SMM page |
+| 28 | `seo-technical.png` | Emerald Green | SEO page |
+| 29 | `seo-onpage.png` | Emerald Green | SEO page |
+| 30 | `seo-linkbuilding.png` | Emerald Green | SEO page |
+| 31 | `webdev-wordpress.png` | Cobalt Blue | WebDev page |
+| 32 | `webdev-custom.png` | Cobalt Blue | WebDev page |
+| 33 | `webdev-ecommerce.png` | Cobalt Blue | WebDev page |
+| 34 | `ads-google.png` | Coral Red | Ads page |
+| 35 | `ads-meta.png` | Coral Red | Ads page |
+| 36 | `ads-retargeting.png` | Coral Red | Ads page |
+| 37 | `content-blog.png` | Warm Amber | Content page |
+| 38 | `content-webcopy.png` | Warm Amber | Content page |
+| 39 | `content-adcopy.png` | Warm Amber | Content page |
+| 40 | `video-reels.png` | Electric Purple | Video page |
+| 41 | `video-promo.png` | Electric Purple | Video page |
+| 42 | `video-motion.png` | Electric Purple | Video page |
+| 43 | `graphic-brandidentity.png` | Coral Red | Graphic page |
+| 44 | `graphic-socialcreatives.png` | Coral Red | Graphic page |
+| 45 | `graphic-print.png` | Coral Red | Graphic page |
+| 46 | `photo-product.png` | Amber Gold | Photo page |
+| 47 | `photo-brandshoots.png` | Amber Gold | Photo page |
+| 48 | `photo-event.png` | Amber Gold | Photo page |
+| 49 | `blog-brand-identity.png` | Coral Red | Blog page |
+| 50 | `blog-google-ads-quality.png` | Electric Blue | Blog page |
+| 51 | `blog-social-trends.png` | Electric Blue | Blog page |
+| 52 | `blog-content-strategy.png` | Warm Amber | Blog page |
+| 53 | `blog-web-design.png` | Cobalt Blue | Blog page |
+| 54 | `blog-ecommerce-growth.png` | Coral Red | Blog page |
+| 55 | `blog-small-business.png` | Amber Gold | Blog page |
+
+---
+
+

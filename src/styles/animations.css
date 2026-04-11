@@ -123,8 +123,8 @@
 }
 
 @keyframes gradientShift {
-  0%, 100% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(15deg); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
 }
 
 /* ─── Outline Text Glow ─── */
@@ -137,6 +137,7 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.3s,
               border-color 0.3s,
+              color 0.3s,
               gap 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -152,6 +153,8 @@
 /* ─── Project Card Lift ─── */
 .project-card {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.5s,
+              border-color 0.5s,
               box-shadow 0.5s;
 }
 
@@ -173,7 +176,9 @@
 
 /* ─── Results Card Hover Scale ─── */
 .results__card {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.5s,
+              border-color 0.5s;
 }
 
 .results__card:hover {

@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const canvas = heroCanvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let animId;
 
@@ -25,7 +25,9 @@ export default function Home() {
       ctx.scale(dpr, dpr);
     }
     resize();
-    window.addEventListener('resize', resize);
+    let resizeTimer;
+    const debouncedResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); };
+    window.addEventListener('resize', debouncedResize);
 
     const blobs = [
       { x: 0.3, y: 0.3, r: 0.45, color: [167, 139, 250], vx: 0.003, vy: 0.002 },
@@ -57,8 +59,8 @@ export default function Home() {
       ctx.globalCompositeOperation = 'source-over';
       animId = requestAnimationFrame(animate);
     }
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    animId = requestAnimationFrame(animate);
+    return () => { cancelAnimationFrame(animId); clearTimeout(resizeTimer); window.removeEventListener('resize', debouncedResize); };
   }, []);
 
   // ─── Testimonials auto-slide ───
@@ -191,11 +193,17 @@ export default function Home() {
 
   // ─── Header scroll state ───
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const header = document.getElementById('site-header');
-      const floatingCta = document.getElementById('floating-cta');
-      if (header) header.classList.toggle('scrolled', window.scrollY > 80);
-      if (floatingCta) floatingCta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.8);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const header = document.getElementById('site-header');
+        const floatingCta = document.getElementById('floating-cta');
+        if (header) header.classList.toggle('scrolled', window.scrollY > 80);
+        if (floatingCta) floatingCta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.8);
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

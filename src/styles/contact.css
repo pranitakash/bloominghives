@@ -110,7 +110,7 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
+  transition: background 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -200,7 +200,7 @@
   font-size: 1.15rem;
   color: rgba(0,0,0,0.4);
   pointer-events: none;
-  transition: all 0.4s var(--ease-out-expo);
+  transition: top 0.4s var(--ease-out-expo), font-size 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo);
 }
 
 .input-group input:focus ~ label,

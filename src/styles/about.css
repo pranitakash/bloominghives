@@ -251,7 +251,7 @@
   padding: clamp(28px, 3vw, 48px);
   border-radius: 20px;
   border: 1px solid rgba(0,0,0,0.08);
-  transition: all 0.4s var(--ease-out-expo);
+  transition: border-color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
 }
 
 .about-service-item:hover {
