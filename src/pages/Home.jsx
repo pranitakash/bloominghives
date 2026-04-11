@@ -8,75 +8,6 @@ export default function Home() {
   const trackRef = useRef(null);
   const totalSlides = 3;
 
-  // ─── Hero Canvas ───
-  const heroCanvasRef = useRef(null);
-  useEffect(() => {
-    const canvas = heroCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: false });
-    // DPR 1 — soft blurry gradients don't benefit from retina, saves 4× pixel fill
-    const dpr = 1;
-    let animId;
-    let started = false;
-
-    function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-    }
-
-    const blobs = [
-      { x: 0.3, y: 0.3, r: 0.45, color: [167, 139, 250], vx: 0.003, vy: 0.002 },
-      { x: 0.7, y: 0.6, r: 0.4, color: [236, 72, 153], vx: -0.004, vy: 0.003 },
-      { x: 0.5, y: 0.8, r: 0.35, color: [96, 165, 250], vx: 0.002, vy: -0.004 },
-      { x: 0.2, y: 0.7, r: 0.3, color: [52, 211, 153], vx: 0.005, vy: -0.002 },
-      { x: 0.8, y: 0.2, r: 0.38, color: [249, 168, 212], vx: -0.003, vy: 0.005 },
-    ];
-
-    function animate() {
-      const w = canvas.width / dpr;
-      const h = canvas.height / dpr;
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillRect(0, 0, w, h);
-      blobs.forEach((b) => {
-        b.x += b.vx; b.y += b.vy;
-        if (b.x < 0 || b.x > 1) b.vx *= -1;
-        if (b.y < 0 || b.y > 1) b.vy *= -1;
-        b.x = Math.max(0, Math.min(1, b.x));
-        b.y = Math.max(0, Math.min(1, b.y));
-        const grad = ctx.createRadialGradient(b.x * w, b.y * h, 0, b.x * w, b.y * h, b.r * Math.max(w, h));
-        grad.addColorStop(0, `rgba(${b.color[0]},${b.color[1]},${b.color[2]}, 0.85)`);
-        grad.addColorStop(0.5, `rgba(${b.color[0]},${b.color[1]},${b.color[2]}, 0.3)`);
-        grad.addColorStop(1, `rgba(${b.color[0]},${b.color[1]},${b.color[2]}, 0)`);
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-      });
-      ctx.globalCompositeOperation = 'source-over';
-      animId = requestAnimationFrame(animate);
-    }
-
-    let resizeTimer;
-    const debouncedResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); };
-
-    // Defer canvas startup so the first paint (hero text + layout) is not blocked
-    const startId = requestAnimationFrame(() => {
-      resize();
-      window.addEventListener('resize', debouncedResize);
-      started = true;
-      animId = requestAnimationFrame(animate);
-    });
-
-    return () => {
-      if (!started) cancelAnimationFrame(startId);
-      if (animId) cancelAnimationFrame(animId);
-      clearTimeout(resizeTimer);
-      window.removeEventListener('resize', debouncedResize);
-    };
-  }, []);
-
   // ─── Testimonials auto-slide ───
   useEffect(() => {
     const interval = setInterval(() => {
@@ -275,7 +206,7 @@ export default function Home() {
           <h1 className="hero__title">
             <span className="hero__line">bloom</span>
             <span className="hero__line hero__line--indent">beyond</span>
-            <span className="hero__line">b<span className="hero__o-wrap"><span className="hero__o-visual"><canvas className="hero__o-canvas" id="hero-o-canvas" ref={heroCanvasRef}></canvas></span></span>ring</span>
+            <span className="hero__line">b<span className="hero__o-wrap"><span className="hero__o-visual"><video className="hero__o-video" id="hero-o-video" autoPlay muted loop playsInline><source src="/assets/videos/hero-reel.mp4" type="video/mp4" /></video></span></span>ring</span>
           </h1>
           <div className="hero__sub">
             <p className="hero__description">Blooming Hives is a creative digital marketing agency based in Delhi, India. We build brands that refuse to blend in — with SEO, social media, paid ads, websites, and content that actually converts.</p>
