@@ -954,7 +954,7 @@ button {
 
 .project-card {
   display: block;
-  border-radius: 16px;
+  border-radius: 0 80px 0 80px;
   overflow: hidden;
   background: rgba(22, 22, 22, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1100,7 +1100,7 @@ button {
 .results__card {
   position: relative;
   background: rgba(22, 22, 22, 0.85);
-  border-radius: 16px;
+  border-radius: 0 80px 0 80px;
   padding: 48px 36px;
   text-align: center;
   overflow: hidden;
@@ -1335,7 +1335,7 @@ button {
 }
 
 .article-card {
-  border-radius: 16px;
+  border-radius: 0 80px 0 80px;
   overflow: hidden;
   background: rgba(22, 22, 22, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
