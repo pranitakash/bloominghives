@@ -14,8 +14,10 @@ export default function Home() {
     const canvas = heroCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // DPR 1 — soft blurry gradients don't benefit from retina, saves 4× pixel fill
+    const dpr = 1;
     let animId;
+    let started = false;
 
     function resize() {
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -24,10 +26,6 @@ export default function Home() {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
-    resize();
-    let resizeTimer;
-    const debouncedResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); };
-    window.addEventListener('resize', debouncedResize);
 
     const blobs = [
       { x: 0.3, y: 0.3, r: 0.45, color: [167, 139, 250], vx: 0.003, vy: 0.002 },
@@ -59,8 +57,24 @@ export default function Home() {
       ctx.globalCompositeOperation = 'source-over';
       animId = requestAnimationFrame(animate);
     }
-    animId = requestAnimationFrame(animate);
-    return () => { cancelAnimationFrame(animId); clearTimeout(resizeTimer); window.removeEventListener('resize', debouncedResize); };
+
+    let resizeTimer;
+    const debouncedResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); };
+
+    // Defer canvas startup so the first paint (hero text + layout) is not blocked
+    const startId = requestAnimationFrame(() => {
+      resize();
+      window.addEventListener('resize', debouncedResize);
+      started = true;
+      animId = requestAnimationFrame(animate);
+    });
+
+    return () => {
+      if (!started) cancelAnimationFrame(startId);
+      if (animId) cancelAnimationFrame(animId);
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', debouncedResize);
+    };
   }, []);
 
   // ─── Testimonials auto-slide ───
@@ -85,10 +99,10 @@ export default function Home() {
   const containerRef = useGSAP(() => {
     const ease = 'power3.out';
 
-    // Hero entrance
+    // Hero entrance — delay gives the browser time to paint layout + canvas first
     const heroTl = gsap.timeline({ defaults: { ease } });
     heroTl
-      .from('.hero__line:nth-child(1)', { yPercent: 100, opacity: 0, duration: 1.2, delay: 0.3 })
+      .from('.hero__line:nth-child(1)', { yPercent: 100, opacity: 0, duration: 1.2, delay: 0.5 })
       .from('.hero__line:nth-child(2)', { yPercent: 100, opacity: 0, duration: 1.2 }, '-=0.85')
       .from('.hero__line:nth-child(3)', { yPercent: 100, opacity: 0, duration: 1.2 }, '-=0.85')
       .from('.hero__sub', { y: 30, opacity: 0, duration: 0.8 }, '-=0.5')

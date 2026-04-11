@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import createGlobe from 'cobe';
 
 const MOVEMENT_DAMPING = 1400;
@@ -6,11 +6,13 @@ const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
 export default function Globe({ className = '' }) {
   const canvasRef = useRef(null);
+  const wrapperRef = useRef(null);
   const phiRef = useRef(0);
   const pointerInteracting = useRef(null);
   const springValue = useRef(0);
   const springTarget = useRef(0);
   const isVisibleRef = useRef(false);
+  const [initialized, setInitialized] = useState(false);
 
   const updatePointerInteraction = useCallback((value) => {
     pointerInteracting.current = value;
@@ -26,7 +28,28 @@ export default function Globe({ className = '' }) {
     }
   }, []);
 
+  // Only initialize the globe when it enters the viewport (lazy init)
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !initialized) {
+          setInitialized(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0, rootMargin: '200px' }
+    );
+    observer.observe(wrapper);
+
+    return () => observer.disconnect();
+  }, [initialized]);
+
+  // Create the globe only once initialized (lazy)
+  useEffect(() => {
+    if (!initialized) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -40,14 +63,14 @@ export default function Globe({ className = '' }) {
     window.addEventListener('resize', onResize);
     onResize();
 
-    // Only render when the globe is visible in the viewport
-    const observer = new IntersectionObserver(
+    // Visibility observer to pause rendering when off-screen
+    const visObserver = new IntersectionObserver(
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
       },
       { threshold: 0, rootMargin: '100px' }
     );
-    observer.observe(canvas);
+    visObserver.observe(canvas);
 
     const globe = createGlobe(canvas, {
       devicePixelRatio: DPR,
@@ -77,7 +100,6 @@ export default function Globe({ className = '' }) {
         { location: [35.6762, 139.6503], size: 0.05 },
       ],
       onRender: (state) => {
-        // Skip heavy rendering when globe is not visible
         if (!isVisibleRef.current) return;
 
         if (!pointerInteracting.current) {
@@ -97,13 +119,13 @@ export default function Globe({ className = '' }) {
 
     return () => {
       globe.destroy();
-      observer.disconnect();
+      visObserver.disconnect();
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [initialized]);
 
   return (
-    <div className={`globe-wrapper ${className}`}>
+    <div className={`globe-wrapper ${className}`} ref={wrapperRef}>
       <canvas
         ref={canvasRef}
         className="globe-canvas"
