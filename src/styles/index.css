@@ -633,6 +633,140 @@ button {
   font-weight: 700;
 }
 
+/* ─── Hero CTA Buttons ─── */
+.hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+
+/* ── Primary: "Get Started" ── */
+.hero__cta--primary {
+  background: var(--color-text-dark);
+  color: #fff;
+  border: 2px solid var(--color-text-dark);
+}
+
+/* Shimmer sweep overlay */
+.hero__cta--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.15) 60%,
+    transparent 100%
+  );
+  transition: none;
+  pointer-events: none;
+}
+
+.hero__cta--primary:hover::before {
+  animation: hero-shimmer 0.75s ease forwards;
+}
+
+@keyframes hero-shimmer {
+  0%   { left: -100%; }
+  100% { left: 120%; }
+}
+
+.hero__cta--primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 28px rgba(26, 26, 26, 0.25),
+    0 2px 8px rgba(26, 26, 26, 0.15);
+}
+
+.hero__cta--primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.hero__cta-arrow {
+  transition: transform 0.35s var(--ease);
+}
+
+.hero__cta--primary:hover .hero__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── WhatsApp: "Connect on WhatsApp" ── */
+.hero__cta--whatsapp {
+  background: transparent;
+  color: var(--color-text-dark);
+  border: 2px solid rgba(26, 26, 26, 0.2);
+}
+
+.hero__cta-wa-icon {
+  transition: transform 0.35s var(--ease);
+}
+
+.hero__cta--whatsapp:hover {
+  background: #25d366;
+  color: #fff;
+  border-color: #25d366;
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 28px rgba(37, 211, 102, 0.35),
+    0 2px 8px rgba(37, 211, 102, 0.2);
+}
+
+.hero__cta--whatsapp:hover .hero__cta-wa-icon {
+  transform: scale(1.15) rotate(-8deg);
+}
+
+.hero__cta--whatsapp:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Subtle pulse ring on WhatsApp hover */
+.hero__cta--whatsapp::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-pill);
+  border: 2px solid rgba(37, 211, 102, 0);
+  transition: border-color 0.4s var(--ease), inset 0.4s var(--ease);
+  pointer-events: none;
+}
+
+.hero__cta--whatsapp:hover::after {
+  border-color: rgba(37, 211, 102, 0.3);
+  inset: -6px;
+}
+
 .hero__badges {
   position: relative;
   z-index: 2;

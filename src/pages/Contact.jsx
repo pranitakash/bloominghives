@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useGSAP, { gsap } from '../hooks/useGSAP';
 import useHeroCanvas from '../hooks/useHeroCanvas';
@@ -7,12 +7,55 @@ import '../styles/contact.css';
 
 const interestOptions = ['Social Media Management', 'Search Engine Optimization', 'Website Development', 'Google and Meta Ads', 'Content Writing', 'Video Editing', 'Graphic Designing', 'Photoshoot'];
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+
 export default function Contact() {
   const [selectedInterests, setSelectedInterests] = useState([]);
+  const [attachedFiles, setAttachedFiles] = useState([]);
+  const [fileError, setFileError] = useState('');
   const canvasRef = useHeroCanvas('#f0ede8', 'multiply', 0.2);
+  const fileInputRef = useRef(null);
 
   const toggleInterest = (interest) => {
     setSelectedInterests(prev => prev.includes(interest) ? prev.filter(i => i !== interest) : [...prev, interest]);
+  };
+
+  const handleFileChange = (e) => {
+    const incoming = Array.from(e.target.files);
+    setFileError('');
+
+    const valid = [];
+    const rejected = [];
+
+    incoming.forEach(file => {
+      if (file.size > MAX_FILE_SIZE) {
+        rejected.push(file.name);
+      } else {
+        valid.push(file);
+      }
+    });
+
+    if (rejected.length) {
+      setFileError(`File${rejected.length > 1 ? 's' : ''} too large (max 10 MB): ${rejected.join(', ')}`);
+    }
+
+    if (valid.length) {
+      setAttachedFiles(prev => [...prev, ...valid]);
+    }
+
+    // Reset input so the same file can be re-selected
+    e.target.value = '';
+  };
+
+  const removeFile = (index) => {
+    setAttachedFiles(prev => prev.filter((_, i) => i !== index));
+    setFileError('');
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
   useEffect(() => {
@@ -98,12 +141,29 @@ export default function Contact() {
                 <div className="input-line"></div>
               </div>
               <div className="input-group file-upload">
-                <label htmlFor="attachments" className="file-trigger">
+                <div className="file-trigger" onClick={() => fileInputRef.current?.click()} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click(); }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.49"></path></svg>
-                  <span>Attachments</span>
-                </label>
-                <input type="file" id="attachments" name="attachments" multiple hidden />
+                  <span>Attachments{attachedFiles.length > 0 && ` (${attachedFiles.length})`}</span>
+                </div>
+                <input type="file" id="attachments" name="attachments" multiple ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
                 <div className="input-line"></div>
+                {fileError && (
+                  <p className="file-error">{fileError}</p>
+                )}
+                {attachedFiles.length > 0 && (
+                  <div className="file-list">
+                    {attachedFiles.map((file, i) => (
+                      <div key={`${file.name}-${i}`} className="file-chip">
+                        <svg className="file-chip__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span className="file-chip__name">{file.name}</span>
+                        <span className="file-chip__size">{formatFileSize(file.size)}</span>
+                        <button type="button" className="file-chip__remove" onClick={() => removeFile(i)} aria-label={`Remove ${file.name}`}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             <div className="form-row row-1col">
