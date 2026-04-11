@@ -666,14 +666,154 @@
   }
 }
 
-@media (max-width: 600px) {
-  .info-split__offices {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: clamp(100px, 12vh, 160px) clamp(16px, 4vw, 40px) clamp(60px, 6vw, 100px);
+  }
+
+  .contact-hero__title {
+    font-size: clamp(2.4rem, 9vw, 4rem);
+    margin-bottom: clamp(48px, 6vh, 80px);
+  }
+
+  .interests-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    margin-bottom: 20px;
+  }
+
+  .interests-grid {
+    gap: 8px;
+  }
+
+  .interest-chip {
+    padding: 10px 20px;
+    font-size: 0.88rem;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+ }
+
+  .form-row {
     gap: 32px;
   }
 
+  .main-form {
+    gap: 36px;
+  }
+
+  .submit-pill {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 32px;
+    font-size: 1rem;
+  }
+
+  .form-submit-container {
+    margin-top: 12px;
+  }
+
+  .contact-hero__right {
+    border-radius: 0 40px 0 40px;
+    padding: clamp(16px, 3vw, 28px);
+  }
+
+  .calendly-title {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+  }
+
+  .info-split__city {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .info-split__phone {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    margin-bottom: 28px;
+  }
+
+  .info-split__email-link {
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+  }
+
+  .info-split__social-item {
+    font-size: 1rem;
+    padding: 6px 0;
+  }
+
+  .info-split__social-block {
+    margin-top: 32px;
+  }
+
+  .info-split__social-title {
+    font-size: 1.1rem;
+  }
+
+  .contact-info-split {
+    padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 60px);
+  }
+
+  .file-chip {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .file-chip__name {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .info-split__offices {
+    flex-direction: column;
+    gap: 28px;
+  }
+
   .info-split__card {
-    border-radius: 12px 60px 12px 12px;
-    padding: 36px;
+    border-radius: 12px 48px 12px 12px;
+    padding: 28px 20px;
+  }
+
+  .info-split__office p {
+    font-size: 0.88rem;
+  }
+
+  .info-split__faq p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-hero__title {
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: clamp(36px, 5vh, 60px);
+  }
+
+  .interests-title {
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+  }
+
+  .interest-chip {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+
+  .info-split__phone {
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+  }
+
+  .info-split__email-link {
+    font-size: clamp(0.95rem, 3.5vw, 1.4rem);
+    word-break: break-all;
+  }
+
+  .submit-pill {
+    padding: 14px 24px;
+    font-size: 0.92rem;
   }
 }

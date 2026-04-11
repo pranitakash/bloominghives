@@ -363,6 +363,7 @@
 @media (max-width: 900px) {
   .about-mission__inner {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .about-values__grid {
@@ -376,6 +377,108 @@
   .about-hero__title {
     font-size: clamp(3rem, 14vw, 6rem);
   }
+
+  .about-services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    min-height: auto;
+    padding: 100px var(--container-pad) 60px;
+  }
+
+  .about-hero__title {
+    font-size: clamp(2.5rem, 11vw, 4.5rem);
+  }
+
+  .about-hero__label {
+    position: relative;
+    bottom: auto;
+    margin-top: 20px;
+  }
+
+  .about-mission {
+    padding: clamp(60px, 8vw, 100px) var(--container-pad);
+  }
+
+  .about-mission__headline {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+
+  .about-mission__text {
+    font-size: 0.95rem;
+  }
+
+  .about-values {
+    padding: clamp(60px, 8vw, 100px) var(--container-pad);
+  }
+
+  .value-card {
+    padding: clamp(28px, 3.5vw, 44px);
+    border-radius: 18px;
+  }
+
+  .value-card__title {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .value-card__desc {
+    font-size: 0.9rem;
+  }
+
+  .about-stats {
+    padding: clamp(60px, 8vw, 100px) var(--container-pad);
+  }
+
+  .stat-block {
+    padding: 32px 16px;
+  }
+
+  .stat-block__value {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .stat-block__label {
+    font-size: 0.85rem;
+  }
+
+  .about-services {
+    padding: clamp(60px, 8vw, 100px) var(--container-pad);
+  }
+
+  .about-services__title {
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+  }
+
+  .about-service-item {
+    padding: clamp(20px, 3vw, 36px);
+    border-radius: 16px;
+  }
+
+  .about-service-item__icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+
+  .about-service-item h3 {
+    font-size: 1.05rem;
+  }
+
+  .about-service-item p {
+    font-size: 0.88rem;
+  }
+
+  .about-cta {
+    padding: clamp(60px, 8vw, 80px) var(--container-pad);
+  }
+
+  .about-cta__title {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    margin-bottom: 28px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -385,5 +488,19 @@
 
   .about-services__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero__title {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+
+  .about-mission__headline {
+    font-size: clamp(1.5rem, 5.5vw, 2.2rem);
+  }
+
+  .about-cta__title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
   }
 }
