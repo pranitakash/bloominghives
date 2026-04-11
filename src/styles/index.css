@@ -253,6 +253,9 @@ button {
   z-index: 1000;
   padding: 20px var(--container-pad);
   transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  overflow: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .site-header::after {

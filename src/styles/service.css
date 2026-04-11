@@ -645,19 +645,27 @@
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1024px) {
+  .service-hero {
+    padding: 110px clamp(20px, 4vw, 60px) 32px;
+    min-height: auto;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+
   .service-hero__content {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
   }
 
   .service-hero__image {
     position: relative;
     top: auto;
     right: auto;
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     align-self: center;
     margin: 0 auto;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
   }
 
   .service-hero__subtitle {
@@ -665,21 +673,16 @@
     max-width: 100%;
   }
 
-  .service-hero {
-    padding: 120px clamp(20px, 4vw, 60px) 40px;
-    min-height: auto;
-  }
-
   .service-intro {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: clamp(48px, 8vw, 100px) clamp(20px, 4vw, 60px);
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 60px);
   }
 
   .service-detail {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: clamp(32px, 5vw, 60px) clamp(20px, 4vw, 60px);
+    gap: 28px;
+    padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 60px);
   }
 
   .service-detail--reverse {
@@ -687,11 +690,11 @@
   }
 
   .service-detail__visual {
-    min-height: 300px;
+    min-height: 280px;
   }
 
   .service-showcase {
-    padding: 24px clamp(20px, 4vw, 60px) clamp(48px, 6vw, 80px);
+    padding: 20px clamp(20px, 4vw, 60px) clamp(40px, 5vw, 60px);
   }
 
   .service-showcase__grid {
@@ -700,31 +703,48 @@
 
   .showcase-card--tall {
     grid-row: span 1;
-    min-height: 240px;
+    min-height: 220px;
   }
 
   .service-results {
-    padding: clamp(48px, 8vw, 100px) clamp(20px, 4vw, 60px);
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 60px);
   }
 
   .service-results__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 36px;
+    gap: 32px;
+  }
+
+  .service-results__title {
+    margin-bottom: 40px;
   }
 
   .service-workflow {
-    padding: clamp(48px, 8vw, 100px) clamp(20px, 4vw, 60px);
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 60px);
   }
 
   .service-workflow__grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-workflow__header {
+    margin-bottom: clamp(32px, 4vw, 56px);
+  }
+
+  .service-cta {
+    padding: clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px);
+  }
+
+  .other-services {
+    padding: clamp(40px, 5vw, 80px) clamp(20px, 4vw, 60px);
   }
 }
 
 @media (max-width: 768px) {
   .service-hero {
     min-height: auto;
-    padding: 100px 16px 32px;
+    padding: 90px 16px 24px;
+    justify-content: flex-start;
   }
 
   .service-hero__content {
