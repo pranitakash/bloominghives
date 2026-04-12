@@ -681,14 +681,12 @@ button {
   left: -100%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.15) 40%,
-    rgba(255, 255, 255, 0.25) 50%,
-    rgba(255, 255, 255, 0.15) 60%,
-    transparent 100%
-  );
+  background: linear-gradient(120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 40%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0.15) 60%,
+      transparent 100%);
   transition: none;
   pointer-events: none;
 }
@@ -698,8 +696,13 @@ button {
 }
 
 @keyframes hero-shimmer {
-  0%   { left: -100%; }
-  100% { left: 120%; }
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 120%;
+  }
 }
 
 .hero__cta--primary:hover {

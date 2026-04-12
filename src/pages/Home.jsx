@@ -205,9 +205,9 @@ export default function Home() {
         <div className="hero__gradient-bg"></div>
         <div className="hero__content">
           <h1 className="hero__title">
-            <span className="hero__line">bloom</span>
-            <span className="hero__line hero__line--indent">beyond</span>
-            <span className="hero__line">b<span className="hero__o-wrap"><span className="hero__o-visual"><video className="hero__o-video" id="hero-o-video" autoPlay muted loop playsInline><source src="/assets/videos/hero-reel.mp4" type="video/mp4" /></video></span></span>ring</span>
+            <span className="hero__line">Bloom</span>
+            <span className="hero__line hero__line--indent">Beyond</span>
+            <span className="hero__line">B<span className="hero__o-wrap"><span className="hero__o-visual"><video className="hero__o-video" id="hero-o-video" autoPlay muted loop playsInline><source src="/assets/videos/hero-reel.mp4" type="video/mp4" /></video></span></span>ring</span>
           </h1>
           <div className="hero__sub">
             <p className="hero__description">Blooming Hives is a creative digital marketing agency based in Delhi, India. We build brands that refuse to blend in — with SEO, social media, paid ads, websites, and content that actually converts.</p>
