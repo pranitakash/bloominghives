@@ -10,7 +10,7 @@ const interestOptions = ['Social Media Management', 'Search Engine Optimization'
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 /*
- * ─── GOOGLE SHEETS SETUP INSTRUCTIONS ───
+ * ─── GOOGLE SHEETS & DRIVE SETUP INSTRUCTIONS ───
  *
  * 1. Go to https://sheets.google.com and create a new spreadsheet
  * 2. Name the first sheet "Form Responses"
@@ -32,6 +32,20 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
  *        }
  *
  *        var data = JSON.parse(e.postData.contents);
+ *        var uploadedFilesUrls = [];
+ *
+ *        // Handle Base64 Attachments
+ *        if (data.attachments && data.attachments.length > 0) {
+ *          var folderIterator = DriveApp.getFoldersByName("Contact Form Attachments");
+ *          var folder = folderIterator.hasNext() ? folderIterator.next() : DriveApp.createFolder("Contact Form Attachments");
+ *          
+ *          for (var i = 0; i < data.attachments.length; i++) {
+ *            var fileData = data.attachments[i];
+ *            var blob = Utilities.newBlob(Utilities.base64Decode(fileData.base64), fileData.mimeType, fileData.name);
+ *            var file = folder.createFile(blob);
+ *            uploadedFilesUrls.push(file.getUrl());
+ *          }
+ *        }
  *
  *        sheet.appendRow([
  *          new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
@@ -41,7 +55,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
  *          data.budget || "",
  *          data.message || "",
  *          data.interests || "",
- *          data.attachments || ""
+ *          uploadedFilesUrls.join('\n')
  *        ]);
  *
  *        return ContentService
@@ -56,13 +70,13 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
  *      }
  *    }
  *
- * 6. Click "Deploy" → "New deployment"
+ * 6. Click "Deploy" → "New deployment" (MUST be a new deployment, not a test execution)
  * 7. Type → "Web app"
  * 8. Execute as: "Me" | Who has access: "Anyone"
- * 9. Click "Deploy" and copy the Web app URL
- * 10. Paste that URL as GOOGLE_SCRIPT_URL below
+ * 9. Click "Deploy" -> "Authorize Access" -> "Allow" to give Google Drive permissions
+ * 10. Copy the Web app URL and paste it as GOOGLE_SCRIPT_URL below
  */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzVyYGnJiKTqE1JkC_E9T8POsxfbLlhAiOAZ4SWXQ_4jtHdVZbpZG7TLXoLNPe23w7Y/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBYVAQtokZ9OIcc8XYkk84xDlyj5B7J3eieVwFSb1ghu0quNYXLU9kiwE-hlqGnGaW/exec';
 
 
 export default function Contact() {
@@ -176,18 +190,33 @@ export default function Contact() {
       return;
     }
 
-    // Prepare payload
-    const payload = {
-      fname: formData.fname.trim(),
-      lname: formData.lname.trim(),
-      email: formData.email.trim(),
-      budget: formData.budget.trim(),
-      message: formData.message.trim(),
-      interests: selectedInterests.join(', '),
-      attachments: attachedFiles.map(f => f.name).join(', '),
-    };
-
     try {
+      // 1. Convert attachments to Base64
+      const base64Files = await Promise.all(
+        attachedFiles.map(file => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve({
+            name: file.name,
+            mimeType: file.type || 'application/octet-stream',
+            // FileReader gives: data:image/png;base64,iVBORw0KGgo...
+            base64: reader.result.split('base64,')[1]
+          });
+          reader.onerror = error => reject(error);
+        }))
+      );
+
+      // Prepare payload
+      const payload = {
+        fname: formData.fname.trim(),
+        lname: formData.lname.trim(),
+        email: formData.email.trim(),
+        budget: formData.budget.trim(),
+        message: formData.message.trim(),
+        interests: selectedInterests.join(', '),
+        attachments: base64Files,
+      };
+
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',

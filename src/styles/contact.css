@@ -412,17 +412,20 @@
   border-radius: 50px;
   background: var(--color-contact-text);
   color: white;
-  border: none;
+  border: 1.5px solid var(--color-contact-text);
   font-family: inherit;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.4s var(--ease-out-expo), background 0.3s ease;
+  transition: transform 0.4s var(--ease-out-expo), background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.4s var(--ease-out-expo);
 }
 
 .submit-pill:hover {
-  background: #333;
-  transform: scale(1.05);
+  background: transparent;
+  color: var(--color-contact-text);
+  border-color: var(--color-contact-text);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
 .submit-pill svg {
@@ -436,13 +439,21 @@
 /* ── Submit Button States ── */
 .submit-pill--loading {
   background: #333;
+  border-color: #333;
+  color: white;
   pointer-events: none;
   opacity: 0.9;
+  box-shadow: none;
+  transform: none;
 }
 
 .submit-pill--success {
   background: #16a34a;
+  border-color: #16a34a;
+  color: white;
   pointer-events: none;
+  box-shadow: none;
+  transform: none;
 }
 
 .submit-pill--success:hover {
@@ -452,7 +463,11 @@
 
 .submit-pill--error {
   background: #dc2626;
+  border-color: #dc2626;
+  color: white;
   pointer-events: none;
+  box-shadow: none;
+  transform: none;
 }
 
 .submit-pill--error:hover {
