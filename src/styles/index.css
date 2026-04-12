@@ -582,7 +582,6 @@ button {
   line-height: 1.0;
   letter-spacing: -0.03em;
   color: var(--color-text-dark);
-  text-transform: lowercase;
   margin-bottom: 40px;
 }
 
