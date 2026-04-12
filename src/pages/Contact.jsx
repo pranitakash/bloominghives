@@ -9,15 +9,85 @@ const interestOptions = ['Social Media Management', 'Search Engine Optimization'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
+/*
+ * ─── GOOGLE SHEETS SETUP INSTRUCTIONS ───
+ *
+ * 1. Go to https://sheets.google.com and create a new spreadsheet
+ * 2. Name the first sheet "Form Responses"
+ * 3. Add these headers in Row 1:
+ *    A1: Timestamp | B1: First Name | C1: Last Name | D1: Email
+ *    E1: Budget | F1: Message | G1: Interests | H1: Attachments
+ *
+ * 4. Go to Extensions → Apps Script
+ * 5. Delete any code and paste the following:
+ *
+ *    function doPost(e) {
+ *      var lock = LockService.getScriptLock();
+ *      lock.tryLock(10000);
+ *
+ *      try {
+ *        var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Form Responses");
+ *        if (!sheet) {
+ *          sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+ *        }
+ *
+ *        var data = JSON.parse(e.postData.contents);
+ *
+ *        sheet.appendRow([
+ *          new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+ *          data.fname || "",
+ *          data.lname || "",
+ *          data.email || "",
+ *          data.budget || "",
+ *          data.message || "",
+ *          data.interests || "",
+ *          data.attachments || ""
+ *        ]);
+ *
+ *        return ContentService
+ *          .createTextOutput(JSON.stringify({ result: "success" }))
+ *          .setMimeType(ContentService.MimeType.JSON);
+ *      } catch (err) {
+ *        return ContentService
+ *          .createTextOutput(JSON.stringify({ result: "error", error: err.toString() }))
+ *          .setMimeType(ContentService.MimeType.JSON);
+ *      } finally {
+ *        lock.releaseLock();
+ *      }
+ *    }
+ *
+ * 6. Click "Deploy" → "New deployment"
+ * 7. Type → "Web app"
+ * 8. Execute as: "Me" | Who has access: "Anyone"
+ * 9. Click "Deploy" and copy the Web app URL
+ * 10. Paste that URL as GOOGLE_SCRIPT_URL below
+ */
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzVyYGnJiKTqE1JkC_E9T8POsxfbLlhAiOAZ4SWXQ_4jtHdVZbpZG7TLXoLNPe23w7Y/exec';
+
+
 export default function Contact() {
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [attachedFiles, setAttachedFiles] = useState([]);
   const [fileError, setFileError] = useState('');
+  const [formData, setFormData] = useState({
+    fname: '',
+    lname: '',
+    email: '',
+    budget: '',
+    message: '',
+  });
+  const [submitStatus, setSubmitStatus] = useState('idle'); // idle | loading | success | error
+  const [errorMessage, setErrorMessage] = useState('');
   const canvasRef = useHeroCanvas('#f0ede8', 'multiply', 0.2);
   const fileInputRef = useRef(null);
 
   const toggleInterest = (interest) => {
     setSelectedInterests(prev => prev.includes(interest) ? prev.filter(i => i !== interest) : [...prev, interest]);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
@@ -93,9 +163,57 @@ export default function Contact() {
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission logic here
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    // Validate required fields
+    if (!formData.fname.trim() || !formData.lname.trim() || !formData.email.trim()) {
+      setSubmitStatus('error');
+      setErrorMessage('Please fill in all required fields.');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+      return;
+    }
+
+    // Prepare payload
+    const payload = {
+      fname: formData.fname.trim(),
+      lname: formData.lname.trim(),
+      email: formData.email.trim(),
+      budget: formData.budget.trim(),
+      message: formData.message.trim(),
+      interests: selectedInterests.join(', '),
+      attachments: attachedFiles.map(f => f.name).join(', '),
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      // With no-cors, we can't read the response, but if fetch didn't throw, it was sent
+      setSubmitStatus('success');
+
+      // Reset form after success
+      setFormData({ fname: '', lname: '', email: '', budget: '', message: '' });
+      setSelectedInterests([]);
+      setAttachedFiles([]);
+      setFileError('');
+
+      // Reset to idle after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorMessage('Something went wrong. Please try again or email us directly.');
+      // Reset to idle after 4 seconds
+      setTimeout(() => setSubmitStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -130,31 +248,31 @@ export default function Contact() {
               <form className="main-form" id="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row row-2col">
                   <div className="input-group">
-                    <input type="text" id="fname" name="fname" required placeholder=" " />
+                    <input type="text" id="fname" name="fname" required placeholder=" " value={formData.fname} onChange={handleInputChange} />
                     <label htmlFor="fname">First name*</label>
                     <div className="input-line"></div>
                   </div>
                   <div className="input-group">
-                    <input type="text" id="lname" name="lname" required placeholder=" " />
+                    <input type="text" id="lname" name="lname" required placeholder=" " value={formData.lname} onChange={handleInputChange} />
                     <label htmlFor="lname">Last name*</label>
                     <div className="input-line"></div>
                   </div>
                 </div>
                 <div className="form-row row-2col">
                   <div className="input-group">
-                    <input type="email" id="email" name="email" required placeholder=" " />
+                    <input type="email" id="email" name="email" required placeholder=" " value={formData.email} onChange={handleInputChange} />
                     <label htmlFor="email">Email address*</label>
                     <div className="input-line"></div>
                   </div>
                   <div className="input-group">
-                    <input type="text" id="budget" name="budget" placeholder=" " />
+                    <input type="text" id="budget" name="budget" placeholder=" " value={formData.budget} onChange={handleInputChange} />
                     <label htmlFor="budget">Budget (₹)</label>
                     <div className="input-line"></div>
                   </div>
                 </div>
                 <div className="form-row row-2col">
                   <div className="input-group">
-                    <textarea id="message" name="message" placeholder=" " rows="1"></textarea>
+                    <textarea id="message" name="message" placeholder=" " rows="1" value={formData.message} onChange={handleInputChange}></textarea>
                     <label htmlFor="message">Message</label>
                     <div className="input-line"></div>
                   </div>
@@ -185,9 +303,35 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="form-submit-container">
-                  <button type="submit" className="submit-pill">
-                    <span>Submit</span>
-                    <ArrowIcon size={20} strokeWidth={2.5} />
+                  <button
+                    type="submit"
+                    className={`submit-pill${submitStatus === 'loading' ? ' submit-pill--loading' : ''}${submitStatus === 'success' ? ' submit-pill--success' : ''}${submitStatus === 'error' ? ' submit-pill--error' : ''}`}
+                    disabled={submitStatus === 'loading'}
+                  >
+                    {submitStatus === 'loading' && (
+                      <>
+                        <span className="submit-spinner"></span>
+                        <span>Sending...</span>
+                      </>
+                    )}
+                    {submitStatus === 'success' && (
+                      <>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>Sent Successfully!</span>
+                      </>
+                    )}
+                    {submitStatus === 'error' && (
+                      <>
+                        <span>⚠</span>
+                        <span>{errorMessage || 'Error — try again'}</span>
+                      </>
+                    )}
+                    {submitStatus === 'idle' && (
+                      <>
+                        <span>Submit</span>
+                        <ArrowIcon size={20} strokeWidth={2.5} />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

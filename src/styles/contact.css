@@ -149,7 +149,7 @@
 .interest-chip {
   padding: 14px 28px;
   border-radius: 50px;
-  border: 1.5px solid rgba(0,0,0,0.15);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
   background: transparent;
   font-family: inherit;
   font-size: 1rem;
@@ -214,9 +214,17 @@
   gap: 60px;
 }
 
-.row-3col { grid-template-columns: 1fr 1fr 2fr; }
-.row-2col { grid-template-columns: 1fr 1fr; }
-.row-1col { grid-template-columns: 1fr; }
+.row-3col {
+  grid-template-columns: 1fr 1fr 2fr;
+}
+
+.row-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.row-1col {
+  grid-template-columns: 1fr;
+}
 
 /* Inputs */
 .input-group {
@@ -228,7 +236,7 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1.5px solid rgba(0,0,0,0.1);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
   padding: 12px 0;
   font-family: inherit;
   font-size: 1.15rem;
@@ -243,18 +251,18 @@
   left: 0;
   top: 12px;
   font-size: 1.15rem;
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
   pointer-events: none;
   transition: top 0.4s var(--ease-out-expo), font-size 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo);
 }
 
-.input-group input:focus ~ label,
-.input-group input:not(:placeholder-shown) ~ label,
-.input-group textarea:focus ~ label,
-.input-group textarea:not(:placeholder-shown) ~ label {
+.input-group input:focus~label,
+.input-group input:not(:placeholder-shown)~label,
+.input-group textarea:focus~label,
+.input-group textarea:not(:placeholder-shown)~label {
   top: -20px;
   font-size: 0.85rem;
-  color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .input-group .input-line {
@@ -267,8 +275,8 @@
   transition: width 0.6s var(--ease-out-expo);
 }
 
-.input-group input:focus ~ .input-line,
-.input-group textarea:focus ~ .input-line {
+.input-group input:focus~.input-line,
+.input-group textarea:focus~.input-line {
   width: 100%;
 }
 
@@ -278,7 +286,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   pointer-events: auto;
   user-select: none;
@@ -299,8 +307,15 @@
 }
 
 @keyframes fileErrorIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Attached File List */
@@ -313,8 +328,15 @@
 }
 
 @keyframes fileListIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Individual File Chip */
@@ -411,6 +433,49 @@
   transform: translateX(5px);
 }
 
+/* ── Submit Button States ── */
+.submit-pill--loading {
+  background: #333;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.submit-pill--success {
+  background: #16a34a;
+  pointer-events: none;
+}
+
+.submit-pill--success:hover {
+  background: #16a34a;
+  transform: none;
+}
+
+.submit-pill--error {
+  background: #dc2626;
+  pointer-events: none;
+}
+
+.submit-pill--error:hover {
+  background: #dc2626;
+  transform: none;
+}
+
+/* Spinner */
+.submit-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ═══════════════════════════════════════════════════
    CONTACT INFO SPLIT (Kota Style)
    ═══════════════════════════════════════════════════ */
@@ -461,7 +526,7 @@
 .info-split__office p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(26,26,26,0.6);
+  color: rgba(26, 26, 26, 0.6);
   font-weight: 400;
 }
 
@@ -487,7 +552,7 @@
 
 .info-split__faq p {
   font-size: 0.9rem;
-  color: rgba(26,26,26,0.5);
+  color: rgba(26, 26, 26, 0.5);
   line-height: 1.7;
 }
 
@@ -519,7 +584,7 @@
 .info-split__email-label {
   display: block;
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.45);
   text-transform: capitalize;
   margin-bottom: 6px;
   font-weight: 400;
@@ -556,7 +621,7 @@
 .info-split__social-item {
   display: block;
   font-size: 1.15rem;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   padding: 8px 0;
   transition: color 0.4s var(--ease-out-expo);
   font-weight: 500;
@@ -609,7 +674,7 @@
 .footer-dark-wrapper .footer__main,
 .footer-dark-wrapper .footer__row,
 .footer-dark-wrapper .footer__bottom {
-  border-top-color: rgba(255,255,255,0.1) !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -629,11 +694,25 @@
 }
 
 @media (max-width: 900px) {
-  .row-3col { grid-template-columns: 1fr; }
-  .row-2col { grid-template-columns: 1fr; }
-  .form-row { gap: 40px; }
-  .main-form { gap: 40px; }
-  .contact-hero__title { font-size: clamp(3rem, 12vw, 5rem); }
+  .row-3col {
+    grid-template-columns: 1fr;
+  }
+
+  .row-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    gap: 40px;
+  }
+
+  .main-form {
+    gap: 40px;
+  }
+
+  .contact-hero__title {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
 
   .contact-hero {
     padding-bottom: clamp(60px, 6vw, 100px);
@@ -698,7 +777,7 @@
 
   .input-group label {
     font-size: 1rem;
- }
+  }
 
   .form-row {
     gap: 32px;
